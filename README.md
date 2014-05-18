@@ -1,8 +1,10 @@
-# Sizeof - size of a JavaScript object in Bytes
+## object-sizeof
 
 [![Build Status](https://travis-ci.org/avrora/sizeof.svg?branch=master)](https://travis-ci.org/avrora/sizeof) [![Dependency Status](https://david-dm.org/avrora/sizeof.svg)](https://david-dm.org/avrora/sizeof)
 
 [![NPM](https://nodei.co/npm/sizeof.png?downloads=true&stars=true)](https://nodei.co/npm/sizeof/)
+
+### Get size of a JavaScript object in bytes
 
 JavaScript does not provide sizeof (like in C), and programmer does not need to care about memory allocation/deallocation. 
 
@@ -10,14 +12,14 @@ However, according to [ECMAScript Language Specification](http://bclary.com/2004
 
 Having this knowledge, the module calculates how much memory object will allocate. 
 
-## Limitations
+### Limitations
 Please note, that V8 which compiles the JavaScript into native machine code, is not taken into account, as the compiled code is additionally heavily optimized. 
 
-## Installation
+### Installation
 
 `npm install object-sizeof`
 
-## Examples
+### Examples
 
 ```javascript
   var sizeof = require('object-sizeof');
@@ -40,7 +42,7 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 
 ```
 
-## Licence
+### Licence
 
 The MIT License (MIT)
 
