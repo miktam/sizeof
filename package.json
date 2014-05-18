@@ -1,0 +1,28 @@
+{
+  "name": "sizeof",
+  "version": "0.1.0",
+  "description": "Sizeof of JavaScript object",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -R tap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/avrora/sizeof.git"
+  },
+  "keywords": [
+    "sizeof",
+    "size",
+    "object"
+  ],
+  "author": "Andrei Karpushonak",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
+    "should": "~3.3.1"
+  }
+}
