@@ -1,7 +1,7 @@
 {
-  "name": "sizeof",
+  "name": "object-sizeof",
   "version": "0.1.0",
-  "description": "Sizeof of JavaScript object",
+  "description": "Sizeof of a JavaScript object in bytes",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha -R tap"
@@ -13,7 +13,8 @@
   "keywords": [
     "sizeof",
     "size",
-    "object"
+    "object",
+    "bytes"
   ],
   "author": "Andrei Karpushonak",
   "license": "MIT",

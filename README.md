@@ -1,4 +1,4 @@
-# Sizeof - size of a JavaScript object
+# Sizeof - size of a JavaScript object in Bytes
 
 [![Build Status](https://travis-ci.org/avrora/sizeof.svg?branch=master)](https://travis-ci.org/avrora/sizeof) [![Dependency Status](https://david-dm.org/avrora/sizeof.svg)](https://david-dm.org/avrora/sizeof)
 
@@ -8,19 +8,19 @@ JavaScript does not provide sizeof (like in C), and programmer does not need to 
 
 However, according to [ECMAScript Language Specification](http://bclary.com/2004/11/07/), each String value is represented by 16-bit unsigned integer, Number uses  the double-precision 64-bit format IEEE 754 values including the special "Not-a-Number" (NaN) values, positive infinity, and negative infinity.
 
-Having this knowledge, the module calculates how much memory object will allocate in memory. 
+Having this knowledge, the module calculates how much memory object will allocate. 
 
 ## Limitations
 Please note, that V8 which compiles the JavaScript into native machine code, is not taken into account, as the compiled code is additionally heavily optimized. 
 
 ## Installation
 
-`npm install sizeof`
+`npm install object-sizeof`
 
 ## Examples
 
 ```javascript
-  var sizeof = require('sizeof');
+  var sizeof = require('object-sizeof');
   
   // 2B per character, 6 chars total => 12B
   console.log(sizeof({abc: 'def'}));
