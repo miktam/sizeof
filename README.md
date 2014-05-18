@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/avrora/sizeof.svg?branch=master)](https://travis-ci.org/avrora/sizeof) [![Dependency Status](https://david-dm.org/avrora/sizeof.svg)](https://david-dm.org/avrora/sizeof)
 
-[![NPM](https://nodei.co/npm/sizeof.png?downloads=true&stars=true)](https://nodei.co/npm/sizeof/)
+[![NPM](https://nodei.co/npm/object-sizeof.png?downloads=true&stars=true)](https://nodei.co/npm/object-sizeof/)
 
 ### Get size of a JavaScript object in bytes
 
