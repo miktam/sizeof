@@ -8,7 +8,7 @@
 
 JavaScript does not provide sizeof (like in C), and programmer does not need to care about memory allocation/deallocation. 
 
-However, according to [ECMAScript Language Specification](http://bclary.com/2004/11/07/), each String value is represented by 16-bit unsigned integer, Number uses  the double-precision 64-bit format IEEE 754 values including the special "Not-a-Number" (NaN) values, positive infinity, and negative infinity.
+However, according to [ECMAScript Language Specification](http://www.ecma-international.org/ecma-262/5.1/), each String value is represented by 16-bit unsigned integer, Number uses  the double-precision 64-bit format IEEE 754 values including the special "Not-a-Number" (NaN) values, positive infinity, and negative infinity.
 
 Having this knowledge, the module calculates how much memory object will allocate. 
 

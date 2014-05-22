@@ -1,6 +1,6 @@
 {
   "name": "object-sizeof",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sizeof of a JavaScript object in bytes",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "lodash": "~2.4.1"
   },
   "devDependencies": {
-    "mocha": "~1.18.2",
+    "mocha": "~1.19.0",
     "should": "~3.3.1"
   }
 }
