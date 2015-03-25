@@ -7,10 +7,12 @@ var sizeof = require("../index");
 
 describe('sizeof', function() {
 
+  it('null is 0', function() {
+    sizeof(null).should.be.equal(0);
+  });
+
   it('undefined is 0', function() {
-
     sizeof().should.be.equal(0);
-
   });
 
   it('of 3 chars string is 2*3=6', function() {
