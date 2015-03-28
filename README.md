@@ -4,6 +4,8 @@
 
 [![NPM](https://nodei.co/npm/object-sizeof.png?downloads=true&stars=true)](https://nodei.co/npm/object-sizeof/)
 
+[![NPM](https://nodei.co/npm-dl/object-sizeof.png)](https://nodei.co/npm-dl/object-sizeof/)
+
 ### Get size of a JavaScript object in bytes
 
 JavaScript does not provide sizeof (like in C), and programmer does not need to care about memory allocation/deallocation. 
