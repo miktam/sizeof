@@ -48,4 +48,4 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 
 The MIT License (MIT)
 
-Copyright (c) 2014, Andrei Karpushonak aka @miktam, http://avrora.io
+Copyright (c) 2015, Andrei Karpushonak aka @miktam, http://avrora.io

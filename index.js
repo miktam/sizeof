@@ -50,10 +50,7 @@ function sizeof(object) {
     bytes = object.length * ECMA_SIZES.STRING;
   } else if (_.isBoolean(object)) {
     bytes = ECMA_SIZES.BOOLEAN;
-  } else if (_.isUndefined(object)) {
-    bytes = 0;
   }
-
   return bytes;
 }
 

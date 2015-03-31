@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var ECMA_SIZE = require('./byte_size');
+var SIZE_FOR_UNRECOGNIZED_TYPE = 0;
 
 function size(obj) {
   if (_.isString(obj)) {
@@ -15,6 +16,8 @@ function size(obj) {
   if (_.isNumber(obj)) {
     return ECMA_SIZE.NUMBER;
   }
+
+  return SIZE_FOR_UNRECOGNIZED_TYPE;
 }
 
 var Stats = function () {
@@ -45,8 +48,6 @@ Stats.prototype.calculateBytes = function() {
   var map = all.map(function(x) {
     return size(x);
   });
-
-//  console.log('map: ', map);
 
   return map.reduce(function(x, y) {
     return x + y;
