@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/avrora/sizeof.svg?branch=master)](https://travis-ci.org/avrora/sizeof) [![Dependency Status](https://david-dm.org/avrora/sizeof.svg)](https://david-dm.org/avrora/sizeof)
 
-[![NPM](https://nodei.co/npm/object-sizeof.png?downloads=true&stars=true)](https://nodei.co/npm/object-sizeof/)
+[![NPM](https://nodei.co/npm/object-sizeof.png?downloads=true&downloadRank=true)](https://nodei.co/npm/object-sizeof/)
 
 [![NPM](https://nodei.co/npm-dl/object-sizeof.png)](https://nodei.co/npm-dl/object-sizeof/)
 
-### Get size of a JavaScript object in bytes
+### Get size of a JavaScript object in Bytes
 
 JavaScript does not provide sizeof (like in C), and programmer does not need to care about memory allocation/deallocation. 
 

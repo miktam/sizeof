@@ -1,6 +1,6 @@
 {
   "name": "object-sizeof",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Sizeof of a JavaScript object in bytes",
   "main": "index.js",
   "scripts": {
