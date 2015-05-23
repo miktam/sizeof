@@ -19,6 +19,10 @@ describe('sizeof', function() {
     sizeof(null).should.be.equal(0);
   });
 
+  it('number size shall be 8', function() {
+    sizeof(5).should.be.equal(8);
+  });
+
   it('undefined is 0', function() {
     sizeof().should.be.equal(0);
   });
