@@ -34,7 +34,7 @@ var collectKeysValues = function (object, stats) {
 /**
  * Main module's entry point
  * Calculates Bytes for the provided parameter
- * @param object - handles object/string/boolean
+ * @param object - handles object/string/boolean/buffer
  * @returns {*}
  */
 function sizeof(object) {
@@ -52,6 +52,8 @@ function sizeof(object) {
     bytes = ECMA_SIZES.BOOLEAN;
   } else if (_.isNumber(object)) {
     bytes = ECMA_SIZES.NUMBER;
+  } else if (Buffer.isBuffer(object)) {
+    bytes = object.length;
   }
   return bytes;
 }
