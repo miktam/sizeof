@@ -38,6 +38,10 @@ describe('sizeof', function() {
   it('boolean size shall be 4', function() {
     sizeof(true).should.be.equal(4);
   });
+  
+  it('buffer size should be correct', function() {
+    sizeof(new Buffer(3)).should.be.equal(3);
+  });
 
   it('nested objects shall be counted in full', function() {
     // 4 one two-bytes char strings and 3 eighth-bytes numbers
