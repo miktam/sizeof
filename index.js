@@ -34,7 +34,7 @@ var collectKeysValues = function (object, stats) {
 /**
  * Main module's entry point
  * Calculates Bytes for the provided parameter
- * @param object - handles object/string/boolean
+ * @param object - handles object/string/boolean/buffer
  * @returns {*}
  */
 function sizeof(object) {
@@ -42,10 +42,15 @@ function sizeof(object) {
   var bytes = 0;
 
   if (_.isObject(object)) {
-    var stats = new Stats();
-    collectKeysValues(object, stats);
-    // calculate size in Bytes based on ECMAScript Language Specs
-    bytes = stats.calculateBytes();
+    if (Buffer.isBuffer(object)) {
+      bytes = object.length;
+    }
+    else {
+      var stats = new Stats();
+      collectKeysValues(object, stats);
+      // calculate size in Bytes based on ECMAScript Language Specs
+      bytes = stats.calculateBytes();
+    }
   } else if (_.isString(object)) {
     bytes = object.length * ECMA_SIZES.STRING;
   } else if (_.isBoolean(object)) {
