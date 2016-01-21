@@ -18,11 +18,9 @@ function sizeof(object) {
     }
     else {
       var bytes = 0;
-      for(var prop in object) {
-        if(object.hasOwnProperty(prop)) {
-          bytes += sizeof(prop) + sizeof(object[prop]);
-        }
-      }
+      _.forOwn(object, function (value, key) {
+        bytes += sizeof(key) + sizeof(value);
+      });
       return bytes;
     }
   } else if (_.isString(object)) {
