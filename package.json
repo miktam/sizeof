@@ -20,7 +20,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "lodash": "^4.3.0"
+    "lodash": "^4.6.1"
   },
   "devDependencies": {
     "mocha": "^2.3.4",

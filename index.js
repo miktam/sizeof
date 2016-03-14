@@ -12,7 +12,6 @@ var ECMA_SIZES  = require('./byte_size');
  * @returns {*}
  */
 function sizeof(object) {
-  try {
     if (_.isObject(object)) {
       if (Buffer.isBuffer(object)) {
         return object.length;
@@ -20,7 +19,14 @@ function sizeof(object) {
       else {
         var bytes = 0;
         _.forOwn(object, function (value, key) {
-          bytes += sizeof(key) + sizeof(value);
+          bytes += sizeof(key);
+          try {
+            bytes += sizeof(value);
+          } catch (ex) {
+            if(ex instanceof RangeError) {
+              console.error('Circular dependency detected, result might be incorrect: ', object)
+            }
+          }
         });
         return bytes;
       }
@@ -33,12 +39,6 @@ function sizeof(object) {
     } else {
       return 0;
     }
-  } catch (ex) {
-
-    if(ex instanceof RangeError) {
-      console.error('detect recursive stuff: ', object)
-    }
-  }
 }
 
 module.exports = sizeof;
