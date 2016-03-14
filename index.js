@@ -12,25 +12,32 @@ var ECMA_SIZES  = require('./byte_size');
  * @returns {*}
  */
 function sizeof(object) {
-  if (_.isObject(object)) {
-    if (Buffer.isBuffer(object)) {
-      return object.length;
+  try {
+    if (_.isObject(object)) {
+      if (Buffer.isBuffer(object)) {
+        return object.length;
+      }
+      else {
+        var bytes = 0;
+        _.forOwn(object, function (value, key) {
+          bytes += sizeof(key) + sizeof(value);
+        });
+        return bytes;
+      }
+    } else if (_.isString(object)) {
+      return object.length * ECMA_SIZES.STRING;
+    } else if (_.isBoolean(object)) {
+      return ECMA_SIZES.BOOLEAN;
+    } else if (_.isNumber(object)) {
+      return ECMA_SIZES.NUMBER;
+    } else {
+      return 0;
     }
-    else {
-      var bytes = 0;
-      _.forOwn(object, function (value, key) {
-        bytes += sizeof(key) + sizeof(value);
-      });
-      return bytes;
+  } catch (ex) {
+
+    if(ex instanceof RangeError) {
+      console.error('detect recursive stuff: ', object)
     }
-  } else if (_.isString(object)) {
-    return object.length * ECMA_SIZES.STRING;
-  } else if (_.isBoolean(object)) {
-    return ECMA_SIZES.BOOLEAN;
-  } else if (_.isNumber(object)) {
-    return ECMA_SIZES.NUMBER;
-  } else {
-    return 0;
   }
 }
 
