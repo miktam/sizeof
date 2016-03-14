@@ -1,6 +1,6 @@
 ## object-sizeof
 
-[![Build Status](https://travis-ci.org/avrora/sizeof.svg?branch=master)](https://travis-ci.org/avrora/sizeof) [![Dependency Status](https://david-dm.org/avrora/sizeof.svg)](https://david-dm.org/avrora/sizeof)
+[![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof) [![Dependency Status](https://david-dm.org/miktam/sizeof.svg)](https://david-dm.org/miktam/sizeof)
 
 [![NPM](https://nodei.co/npm/object-sizeof.png?downloads=true&downloadRank=true)](https://nodei.co/npm/object-sizeof/)
 
@@ -48,4 +48,4 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 
 The MIT License (MIT)
 
-Copyright (c) 2015, Andrei Karpushonak aka @miktam, http://avrora.io
+Copyright (c) 2015, Andrei Karpushonak aka @miktam
