@@ -24,7 +24,9 @@ function sizeof(object) {
             bytes += sizeof(value);
           } catch (ex) {
             if(ex instanceof RangeError) {
-              console.log('Circular dependency detected, result might be incorrect: ', object)
+              // circular reference detected, final result might be incorrect
+              // let's be nice and not throw an exception
+              bytes = 0;
             }
           }
         });
