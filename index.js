@@ -34,10 +34,8 @@ function sizeof(object) {
       return 0;
     }
   } catch (ex) {
-
-    if(ex instanceof RangeError) {
-      console.error('detect recursive stuff: ', object)
-    }
+    // do not rethrow, just nullify current branch
+    return 0
   }
 }
 
