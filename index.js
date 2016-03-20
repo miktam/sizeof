@@ -1,5 +1,3 @@
-// Copyright 2014 Andrei Karpushonak
-
 "use strict";
 
 var _           = require('lodash');
@@ -12,6 +10,7 @@ var ECMA_SIZES  = require('./byte_size');
  * @returns {*}
  */
 function sizeof(object) {
+  try {
     if (_.isObject(object)) {
       if (Buffer.isBuffer(object)) {
         return object.length;
@@ -19,16 +18,7 @@ function sizeof(object) {
       else {
         var bytes = 0;
         _.forOwn(object, function (value, key) {
-          bytes += sizeof(key);
-          try {
-            bytes += sizeof(value);
-          } catch (ex) {
-            if(ex instanceof RangeError) {
-              // circular reference detected, final result might be incorrect
-              // let's be nice and not throw an exception
-              bytes = 0;
-            }
-          }
+          bytes += sizeof(key) + sizeof(value);
         });
         return bytes;
       }
@@ -41,6 +31,10 @@ function sizeof(object) {
     } else {
       return 0;
     }
+  } catch (ex) {
+    // do not rethrow, just nullify current branch
+    return 0
+  }
 }
 
 module.exports = sizeof;
