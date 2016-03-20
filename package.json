@@ -1,6 +1,6 @@
 {
   "name": "object-sizeof",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Sizeof of a JavaScript object in bytes",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/avrora/sizeof.git"
+    "url": "git://github.com/miktam/sizeof.git"
   },
   "keywords": [
     "sizeof",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "lodash": "^4.3.0"
+    "lodash": "^4.6.1"
   },
   "devDependencies": {
     "mocha": "^2.3.4",

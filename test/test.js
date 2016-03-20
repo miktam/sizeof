@@ -60,13 +60,11 @@ describe('sizeof', function() {
     sizeof(obj).should.be.equal(ELEMENTS * 2 * (('' + ELEMENTS).length) + ELEMENTS * 8);
   });
 
-  it('handle recursive objects', function() {
-    var firstLevel = {a: 1}
-    var secondLevel = {b: 2, c: firstLevel}
-
-    firstLevel.second = secondLevel
-    var size = sizeof(firstLevel)
-    console.log('size: ', size)
+  it('report an error for circular dependency objects', function() {
+    var firstLevel = {a: 1};
+    var secondLevel = {b: 2, c: firstLevel};
+    firstLevel.second = secondLevel;
+    should.exist(sizeof(firstLevel));
   });
 
-})
+});

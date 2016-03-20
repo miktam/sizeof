@@ -1,5 +1,3 @@
-// Copyright 2014 Andrei Karpushonak
-
 "use strict";
 
 var _           = require('lodash');
