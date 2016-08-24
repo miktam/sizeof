@@ -4,7 +4,6 @@
 
 var should = require('should');
 var sizeof = require("../index");
-var _ = require('lodash');
 
 describe('sizeof', function() {
 
@@ -12,7 +11,7 @@ describe('sizeof', function() {
     var badData = {"1":{"depot_id":null,"hierarchy_node_id":null}};
     console.log('size', sizeof(badData));
     sizeof(badData);
-    _.isNaN(sizeof(badData)).should.be.equal(false);
+    isNaN(sizeof(badData)).should.be.equal(false);
   });
 
   it('null is 0', function() {
