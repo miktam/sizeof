@@ -2,7 +2,6 @@
 
 "use strict";
 
-var _           = require('lodash');
 var ECMA_SIZES  = require('./byte_size');
 
 /**
@@ -12,16 +11,20 @@ var ECMA_SIZES  = require('./byte_size');
  * @returns {*}
  */
 function sizeof(object) {
-    if (_.isObject(object)) {
+    if (object !== null && typeof (object) === 'object') {
       if (Buffer.isBuffer(object)) {
         return object.length;
       }
       else {
         var bytes = 0;
-        _.forOwn(object, function (value, key) {
+        for (var key in object) {
+          if (!object.hasOwnProperty(key)) {
+            continue;
+          }
+
           bytes += sizeof(key);
           try {
-            bytes += sizeof(value);
+            bytes += sizeof(object[key]);
           } catch (ex) {
             if(ex instanceof RangeError) {
               // circular reference detected, final result might be incorrect
@@ -29,14 +32,14 @@ function sizeof(object) {
               bytes = 0;
             }
           }
-        });
+        }
         return bytes;
       }
-    } else if (_.isString(object)) {
+    } else if (typeof (object) === 'string') {
       return object.length * ECMA_SIZES.STRING;
-    } else if (_.isBoolean(object)) {
+    } else if (typeof (object) === 'boolean') {
       return ECMA_SIZES.BOOLEAN;
-    } else if (_.isNumber(object)) {
+    } else if (typeof (object) === 'number') {
       return ECMA_SIZES.NUMBER;
     } else {
       return 0;
