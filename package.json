@@ -1,6 +1,6 @@
 {
   "name": "object-sizeof",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "Sizeof of a JavaScript object in bytes",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "readmeFilename": "README.md",
   "dependencies": {},
   "devDependencies": {
-    "mocha": "^2.3.4",
-    "should": "^8.1.1"
+    "mocha": "^3.0.2",
+    "should": "^11.1.0"
   }
 }
