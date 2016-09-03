@@ -9,9 +9,7 @@ describe('sizeof', function() {
 
   it('should handle null in object keys', function() {
     var badData = {"1":{"depot_id":null,"hierarchy_node_id":null}};
-    console.log('size', sizeof(badData));
-    sizeof(badData);
-    isNaN(sizeof(badData)).should.be.equal(false);
+    sizeof(badData).should.be.instanceOf(Number);
   });
 
   it('null is 0', function() {
@@ -64,6 +62,12 @@ describe('sizeof', function() {
     var secondLevel = {b: 2, c: firstLevel};
     firstLevel.second = secondLevel;
     should.exist(sizeof(firstLevel));
+  });
+
+  it('handle hasOwnProperty key', function() {
+    sizeof({hasOwnProperty: undefined}).should.be.instanceOf(Number);
+    sizeof({hasOwnProperty: 'Hello World'}).should.be.instanceOf(Number);
+    sizeof({hasOwnProperty: 1234}).should.be.instanceOf(Number);
   });
 
 });
