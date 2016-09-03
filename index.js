@@ -18,7 +18,8 @@ function sizeof(object) {
       else {
         var bytes = 0;
         for (var key in object) {
-          if (!object.hasOwnProperty(key)) {
+
+          if(!Object.hasOwnProperty.call(object, key)) {
             continue;
           }
 

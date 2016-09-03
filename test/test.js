@@ -66,4 +66,10 @@ describe('sizeof', function() {
     should.exist(sizeof(firstLevel));
   });
 
+  it('handle hasOwnProperty key', function() {
+    sizeof({hasOwnProperty:undefined})
+    sizeof({hasOwnProperty:"Hello World"})
+    sizeof({hasOwnProperty:1234})
+  });
+
 });
