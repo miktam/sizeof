@@ -30,7 +30,7 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
   console.log(sizeof({abc: 'def'}));
   
   // 8B for Number => 8B
-  console.log(sizeof(12345);
+  console.log(sizeof(12345));
   
   var param = { 
     'a': 1, 
