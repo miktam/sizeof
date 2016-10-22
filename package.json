@@ -21,7 +21,7 @@
   "readmeFilename": "README.md",
   "dependencies": {},
   "devDependencies": {
-    "mocha": "^3.0.2",
-    "should": "^11.1.0"
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
   }
 }
