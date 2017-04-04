@@ -19,7 +19,9 @@
   "author": "Andrei Karpushonak",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "dependencies": {},
+  "dependencies": {
+    "buffer": "^5.0.5"
+  },
   "devDependencies": {
     "mocha": "^3.0.2",
     "should": "^11.1.0"
