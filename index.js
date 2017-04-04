@@ -3,6 +3,7 @@
 "use strict";
 
 var ECMA_SIZES  = require('./byte_size');
+var Buffer = require('buffer').Buffer;
 
 /**
  * Main module's entry point
