@@ -5,8 +5,8 @@
 var ECMA_SIZES  = require('./byte_size');
 var Buffer = require('buffer').Buffer;
 
-function sizeOfObject(obj) {
-  if (obj == null) {
+function sizeOfObject(object) {
+  if (object == null) {
     return 0;
   }
 
