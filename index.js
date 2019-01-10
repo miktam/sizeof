@@ -38,6 +38,10 @@ function sizeOfObject(object) {
  * @returns {*}
  */
 function sizeof(object) {
+    if (Buffer.isBuffer(object)) {
+      return object.length;
+    }
+
     var objectType = typeof(object);
     switch (objectType) {
       case 'string':
