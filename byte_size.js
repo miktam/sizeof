@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-    STRING: 2,
-    BOOLEAN: 4,
-    NUMBER: 8
-};
+  STRING: 2,
+  BOOLEAN: 4,
+  NUMBER: 8
+}
