@@ -4,8 +4,6 @@
 
 [![NPM](https://nodei.co/npm/object-sizeof.png?downloads=true&downloadRank=true)](https://nodei.co/npm/object-sizeof/)
 
-[![NPM](https://nodei.co/npm-dl/object-sizeof.png)](https://nodei.co/npm-dl/object-sizeof/)
-
 ### Get size of a JavaScript object in Bytes
 
 JavaScript does not provide sizeof (like in C), and programmer does not need to care about memory allocation/deallocation. 
@@ -24,13 +22,13 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 ### Examples
 
 ```javascript
-  var sizeof = require('object-sizeof');
+  var sizeof = require('object-sizeof')
   
   // 2B per character, 6 chars total => 12B
-  console.log(sizeof({abc: 'def'}));
+  console.log(sizeof({abc: 'def'}))
   
   // 8B for Number => 8B
-  console.log(sizeof(12345));
+  console.log(sizeof(12345))
   
   var param = { 
     'a': 1, 
@@ -38,9 +36,9 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
     'c': {
       'd': 4
     }
-  };
+  }
   // 4 one two-bytes char strings and 3 eighth-bytes numbers => 32B
-  console.log(sizeof(param));
+  console.log(sizeof(param))
 
 ```
 
