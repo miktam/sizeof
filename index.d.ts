@@ -1,0 +1,1 @@
+export declare function sizeof(object: object): number;
