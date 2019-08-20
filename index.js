@@ -52,7 +52,7 @@ function sizeof (object) {
       return ECMA_SIZES.NUMBER
     case 'object':
       if (Array.isArray(object)) {
-        return object.map(sizeof).reduce((acc, curr) => acc + curr)
+        return object.map(sizeof).reduce((acc, curr) => acc + curr, 0)
       } else {
         return sizeOfObject(object)
       }
