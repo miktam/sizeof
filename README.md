@@ -1,6 +1,7 @@
 ## object-sizeof
 
 [![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof) [![Dependency Status](https://david-dm.org/miktam/sizeof.svg)](https://david-dm.org/miktam/sizeof)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_shield)
 
 [![NPM](https://nodei.co/npm/object-sizeof.png?downloads=true&downloadRank=true)](https://nodei.co/npm/object-sizeof/)
 
@@ -47,3 +48,5 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 The MIT License (MIT)
 
 Copyright (c) 2015, Andrei Karpushonak aka @miktam
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_large)
