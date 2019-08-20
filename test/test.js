@@ -7,7 +7,7 @@ var sizeof = require('../index')
 
 describe('sizeof', function () {
   it('should handle null in object keys', function () {
-    var badData = { '1': { 'depot_id': null, 'hierarchy_node_id': null } }
+    var badData = { 1: { depot_id: null, hierarchy_node_id: null } }
     sizeof(badData).should.be.instanceOf(Number)
   })
 
@@ -67,5 +67,17 @@ describe('sizeof', function () {
     sizeof({ hasOwnProperty: undefined }).should.be.instanceOf(Number)
     sizeof({ hasOwnProperty: 'Hello World' }).should.be.instanceOf(Number)
     sizeof({ hasOwnProperty: 1234 }).should.be.instanceOf(Number)
+  })
+
+  it('array support for strings', function () {
+    sizeof(['a', 'b', 'c', 'd']).should.be.equal(8)
+  })
+
+  it('array support for numbers', function () {
+    sizeof([1, 2, 3, 4]).should.equal(32)
+  })
+
+  it('array support for NaN', function () {
+    sizeof([null, undefined, 3, 4]).should.equal(16)
   })
 })
