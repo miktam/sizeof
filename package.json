@@ -1,6 +1,6 @@
 {
   "name": "object-sizeof",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Sizeof of a JavaScript object in Bytes",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "buffer": "^5.4.3"
   },
   "devDependencies": {
-    "mocha": "^6.2.1",
+    "mocha": "^7.0.1",
     "should": "^13.2.3",
     "standard": "^14.3.1"
   },
