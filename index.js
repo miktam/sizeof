@@ -15,9 +15,9 @@ function sizeOfObject (seen, object) {
     // Do not recalculate circular references
     if (typeof object[key] === 'object' && object[key] !== null) {
       if (seen.has(object[key])) {
-        continue;
+        continue
       }
-      seen.add(object[key]);
+      seen.add(object[key])
     }
 
     bytes += getCalculator(seen)(key)
@@ -35,9 +35,8 @@ function sizeOfObject (seen, object) {
   return bytes
 }
 
-
 function getCalculator (seen) {
-  return function(object) {
+  return function (object) {
     if (Buffer.isBuffer(object)) {
       return object.length
     }
@@ -71,7 +70,7 @@ function getCalculator (seen) {
  * @returns {*}
  */
 function sizeof (object) {
-  return getCalculator(new WeakSet())(object);
+  return getCalculator(new WeakSet())(object)
 }
 
 module.exports = sizeof
