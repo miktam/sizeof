@@ -5,13 +5,27 @@
 var ECMA_SIZES = require('./byte_size')
 var Buffer = require('buffer').Buffer
 
+function allProperties(obj) {
+  const stringProperties = []
+  for (var prop in obj) { 
+      stringProperties.push(prop)
+  }
+  if (Object.getOwnPropertySymbols) {
+      var symbolProperties = Object.getOwnPropertySymbols(obj)
+      Array.prototype.push.apply(stringProperties, symbolProperties)
+  }
+  return stringProperties
+}
+
 function sizeOfObject (seen, object) {
   if (object == null) {
     return 0
   }
 
   var bytes = 0
-  for (var key in object) {
+  var properties = allProperties(object)
+  for (var i = 0; i < properties.length; i++) {
+    var key = properties[i]
     // Do not recalculate circular references
     if (typeof object[key] === 'object' && object[key] !== null) {
       if (seen.has(object[key])) {
@@ -36,7 +50,7 @@ function sizeOfObject (seen, object) {
 }
 
 function getCalculator (seen) {
-  return function (object) {
+  return function calculator(object) {
     if (Buffer.isBuffer(object)) {
       return object.length
     }
@@ -49,6 +63,9 @@ function getCalculator (seen) {
         return ECMA_SIZES.BOOLEAN
       case 'number':
         return ECMA_SIZES.NUMBER
+      case 'symbol':
+        const isGlobalSymbol = Symbol.keyFor && Symbol.keyFor(object)
+        return isGlobalSymbol ? Symbol.keyFor(object).length * ECMA_SIZES.STRING : (object.toString().length - 8) * ECMA_SIZES.STRING 
       case 'object':
         if (Array.isArray(object)) {
           return object.map(getCalculator(seen)).reduce(function (acc, curr) {
