@@ -20,12 +20,12 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "buffer": "^5.4.3"
+    "buffer": "^5.5.0"
   },
   "devDependencies": {
-    "mocha": "^7.0.1",
+    "mocha": "^7.1.1",
     "should": "^13.2.3",
-    "standard": "^14.3.1"
+    "standard": "^14.3.3"
   },
   "types": "index.d.ts"
 }
