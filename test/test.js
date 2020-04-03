@@ -80,4 +80,49 @@ describe('sizeof', function () {
   it('array support for NaN', function () {
     sizeof([null, undefined, 3, 4]).should.equal(16)
   })
+
+  it('supports symbol', () => {
+    const descriptor = 'abcd'
+    sizeof(Symbol(descriptor)).should.equal(2 * descriptor.length)
+  })
+
+  it('supports symbols as keys', () => {
+    const descriptor = 'abcd'
+    const symbol = Symbol(descriptor)
+    const value = 'efg'
+    sizeof({ [symbol]: value }).should.equal(2 * descriptor.length + 2 * value.length)
+  })
+
+  it('supports nested symbols as keys', () => {
+    const a = Symbol('a')
+    const b = Symbol('b')
+    const c = Symbol('c')
+    const obj = { [a]: { [b]: { [c]: 'd' } } }
+    sizeof(obj).should.equal(8)
+  })
+
+  it('supports nested symbols as values', () => {
+    const a = Symbol('a')
+    const b = Symbol('b')
+    const c = Symbol('c')
+    const d = Symbol('d')
+    const obj = { [a]: { [b]: { [c]: d } } }
+    sizeof(obj).should.equal(8)
+  })
+
+  it('does not recount seen objects', () => {
+    const a = Symbol('a')
+    const b = Symbol('b')
+    const c = Symbol('c')
+    const d = Symbol('d')
+    const obj = { [a]: { [b]: { [c]: d } } }
+    obj[Symbol()] = obj[a]
+    sizeof(obj).should.equal(8)
+  })
+
+  it('supports global symbols', () => {
+    const globalSymbol = Symbol.for('a')
+    const obj = { [globalSymbol]: 'b'}
+    sizeof(obj).should.equal(4)
+  })
 })
