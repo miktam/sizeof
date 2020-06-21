@@ -22,6 +22,8 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 
 ### Examples
 
+#### ES5
+
 ```javascript
   var sizeof = require('object-sizeof')
   
@@ -40,7 +42,28 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
   }
   // 4 one two-bytes char strings and 3 eighth-bytes numbers => 32B
   console.log(sizeof(param))
+```
 
+#### ES6
+
+```javascript
+  import sizeof from 'object-sizeof'
+  
+  // 2B per character, 6 chars total => 12B
+  console.log(sizeof({abc: 'def'}))
+  
+  // 8B for Number => 8B
+  console.log(sizeof(12345))
+  
+  const param = { 
+    'a': 1, 
+    'b': 2, 
+    'c': {
+      'd': 4
+    }
+  }
+  // 4 one two-bytes char strings and 3 eighth-bytes numbers => 32B
+  console.log(sizeof(param))
 ```
 
 ### Licence
