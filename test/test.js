@@ -4,6 +4,7 @@
 
 var should = require('should')
 var sizeof = require('../index')
+const Buffer = require('buffer/').Buffer
 
 describe('sizeof', function () {
   it('should handle null in object keys', function () {
