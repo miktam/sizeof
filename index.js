@@ -3,7 +3,7 @@
 'use strict'
 
 var ECMA_SIZES = require('./byte_size')
-var Buffer = require('buffer').Buffer
+var Buffer = require('buffer/').Buffer
 
 function allProperties(obj) {
   const stringProperties = []
