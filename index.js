@@ -5,6 +5,8 @@
 var ECMA_SIZES = require('./byte_size')
 var Buffer = require('buffer/').Buffer
 
+var isNodePlatform =  typeof process === "object" && typeof require === "function";
+
 function allProperties(obj) {
   const stringProperties = []
   for (var prop in obj) { 
@@ -58,7 +60,8 @@ function getCalculator (seen) {
     var objectType = typeof (object)
     switch (objectType) {
       case 'string':
-        return object.length * ECMA_SIZES.STRING
+        // https://stackoverflow.com/questions/68789144/how-much-memory-do-v8-take-to-store-a-string/68791382#68791382
+        return isNodePlatform ? 12 + 4 * Math.ceil(object.length/4) : object.length * ECMA_SIZES.STRING
       case 'boolean':
         return ECMA_SIZES.BOOLEAN
       case 'number':
