@@ -27,5 +27,5 @@
     "should": "^13.2.3",
     "standard": "^17.0.0"
   },
-  "types": "index.d.ts"
+  "types": "indexv2.d.ts"
 }
