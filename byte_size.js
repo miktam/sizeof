@@ -7,5 +7,6 @@
 module.exports = {
   STRING: 2,
   BOOLEAN: 4,
+  BYTES: 4,
   NUMBER: 8
 }

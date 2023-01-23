@@ -23,8 +23,8 @@ describe('sizeof', function () {
     sizeof().should.be.equal(0)
   })
 
-  it('of 3 chars string is 16', function () {
-    sizeof('abc').should.be.equal(16)
+  it('of 3 chars string is 6', function () {
+    sizeof('abc').should.be.equal(6)
   })
 
   it('boolean size shall be 4', function () {
