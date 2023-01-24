@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_shield)
 [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof)
+[![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg)](https://codecov.io/gh/miktam/sizeof)
 
 ### Get size of a JavaScript object in Bytes - version 2.x
 

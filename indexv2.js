@@ -33,7 +33,7 @@ function objectSizeBrowser (obj) {
   let bytes = 0
 
   while (stack.length) {
-    var value = stack.pop()
+    const value = stack.pop()
 
     if (typeof value === 'boolean') {
       bytes += ECMA_SIZES.BYTES
@@ -51,7 +51,7 @@ function objectSizeBrowser (obj) {
     } else if (typeof value === 'object' && objectList.indexOf(value) === -1) {
       objectList.push(value)
 
-      for (var i in value) {
+      for (const i in value) {
         stack.push(value[i])
       }
     }

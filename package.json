@@ -4,7 +4,9 @@
   "description": "Sizeof of a JavaScript object in Bytes",
   "main": "indexv2.js",
   "scripts": {
-    "test": "./node_modules/.bin/standard; ./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/standard; ./node_modules/.bin/mocha",
+    "lint": "./node_modules/.bin/standard",
+    "coverage": "./node_modules/.bin/nyc npm test; ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov --token=708ee89f-4e9c-402d-8380-1257b979596c"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,9 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "codecov": "^3.8.3",
+    "nyc": "^15.1.0"
   },
   "devDependencies": {
     "mocha": "^10.2.0",
