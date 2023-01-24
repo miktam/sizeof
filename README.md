@@ -1,19 +1,15 @@
 ## object-sizeof
 
-[![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_shield)
-[![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof)
-[![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg)](https://codecov.io/gh/miktam/sizeof)
+[![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof) [![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg?token=qPHxmWpC1K)](https://codecov.io/gh/miktam/sizeof)
 
 ### Get size of a JavaScript object in Bytes - version 2.x
 
 New version uses the Buffer.from(objectToString) method to convert the string representation of the object to a buffer and then it uses the byteLength property to obtain the size of the buffer in bytes.
 Note that this method only work in Node.js environment.
 
-For everything else, the calculation takes an object as an argument and uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters. The function works by creating an array 'objectList' which is used to keep track of objects that have already been processed so as to avoid cyclic references.
-It uses stack to keep track of the object properties and iterates over the stack and for each item on the stack it checks if it's type of boolean, string, number or object. If it's boolean it's size is 4 bytes, if it's string it's size is length of string \* 2 bytes, if it's number it's size is 8 bytes, if it's object and it's not in the objectList it's pushed to the stack to be iterated again.
+For everything else, the calculation takes an object as an argument and uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
 
-Please note that this function will not work on all cases, specially when dealing with complex data structures or when the object contains functions, it's just an example of how one can calculate the size of an object in javascript
+Please note that this function will not work on all cases, specially when dealing with complex data structures or when the object contains functions.
 
 ### Get size of a JavaScript object in Bytes - version 1.x
 
@@ -83,4 +79,4 @@ The MIT License (MIT)
 
 Copyright (c) 2015, Andrei Karpushonak aka @miktam
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_large)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_shield)
