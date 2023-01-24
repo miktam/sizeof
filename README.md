@@ -11,6 +11,11 @@ For everything else, the calculation takes an object as an argument and uses a c
 
 Please note that this function will not work on all cases, specially when dealing with complex data structures or when the object contains functions.
 
+### Coding standards
+
+Project uses [JavaScript Standard Style](https://standardjs.com/).
+Code coverage reports done using Codecov.io.
+
 ### Get size of a JavaScript object in Bytes - version 1.x
 
 JavaScript does not provide sizeof (like in C), and programmer does not need to care about memory allocation/deallocation.
