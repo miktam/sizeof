@@ -3,10 +3,34 @@
 'use strict'
 const ECMA_SIZES = require('./byte_size')
 
-function objectSize (obj) {
-  var objectList = []
-  var stack = [obj]
-  var bytes = 0
+/**
+ * Size in bytes in a Node.js environment
+ * @param {*} obj
+ * @returns size in bytes, or -1 if JSON.stringify threw an exception
+ */
+function objectSizeNode (obj) {
+  let totalSize = 0
+  const errorIndication = -1
+  try {
+    const objectToString = JSON.stringify(obj)
+    const buffer = new Buffer.from(objectToString)
+    totalSize = buffer.byteLength
+  } catch (ex) {
+    console.error('Error detected, return ' + errorIndication, ex)
+    return errorIndication
+  }
+  return totalSize
+}
+
+/**
+ * Size in bytes in a browser environment
+ * @param {*} obj
+ * @returns size in bytes
+ */
+function objectSizeBrowser (obj) {
+  const objectList = []
+  const stack = [obj]
+  let bytes = 0
 
   while (stack.length) {
     var value = stack.pop()
@@ -35,22 +59,28 @@ function objectSize (obj) {
   return bytes
 }
 
+/**
+ * Are we running in a Node.js environment
+ * @returns boolean
+ */
+function isNodeEnvironment () {
+  if (
+    typeof process !== 'undefined' &&
+    process.versions &&
+    process.versions.node
+  ) {
+    return true
+  }
+  return false
+}
+
 module.exports = function (obj) {
   let totalSize = 0
-  const errorIndication = -1
 
-  if (obj !== null && typeof obj === 'object') {
-    try {
-      const objectToString = JSON.stringify(obj)
-      const buffer = new Buffer.from(objectToString)
-      totalSize = buffer.byteLength
-    } catch (ex) {
-      console.error('Error detected, return ' + errorIndication, ex)
-      return errorIndication
-    }
+  if (obj !== null && typeof obj === 'object' && isNodeEnvironment()) {
+    totalSize = objectSizeNode(obj)
   } else {
-    console.log('type of object not recognized', typeof obj)
-    return objectSize(obj)
+    totalSize = objectSizeBrowser(obj)
   }
 
   return totalSize
