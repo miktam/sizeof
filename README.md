@@ -4,12 +4,11 @@
 
 ### Get size of a JavaScript object in Bytes - version 2.x
 
-New version uses the Buffer.from(objectToString) method to convert the string representation of the object to a buffer and then it uses the byteLength property to obtain the size of the buffer in bytes.
-Note that this method only work in Node.js environment.
+Node.js version uses the Buffer.from(objectToString) method to convert the object's string representation to a buffer, and then it uses the byteLength property to obtain the buffer size in bytes.
 
-For everything else, the calculation takes an object as an argument and uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
+For the browser, the calculation takes an object as an argument. It uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
 
-Please note that this function will not work on all cases, specially when dealing with complex data structures or when the object contains functions.
+Please note that this function will only work in some cases, especially when dealing with complex data structures or when the object contains functions.
 
 ### Coding standards
 
