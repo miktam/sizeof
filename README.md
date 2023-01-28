@@ -45,22 +45,9 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 
 ```javascript
 import sizeof from 'object-sizeof'
-
-// 2B per character, 6 chars total => 12B
-console.log(sizeof({ abc: 'def' }))
-
-// 8B for Number => 8B
-console.log(sizeof(12345))
-
-const param = {
-  a: 1,
-  b: 2,
-  c: {
-    d: 4
-  }
-}
-// 4 one two-bytes char strings and 3 eighth-bytes numbers => 32B
-console.log(sizeof(param))
+// const sizeof = require("object-sizeof")
+console.log("Object { abc: 'def' } in bytes: " + sizeof({ abc: 'def' })) // "Object { abc: 'def' } in bytes: 13"
+console.log("Integer 12345 in bytes: " + sizeof(12345)) // "Integer 12345 in bytes: 8"
 ```
 
 ### Licence
