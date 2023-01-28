@@ -15,8 +15,11 @@ function objectSizeNode (obj) {
     // analyse the object to calculate it better
     let potentialConversion = obj
     if (obj instanceof Map) {
-      // convert the map to an object, including the nested properties
+      // convert the map to an object
       potentialConversion = Object.fromEntries(obj)
+    } else if (obj instanceof Set) {
+      // convert the set to an array
+      potentialConversion = Array.from(obj)
     }
     const objectToString = JSON.stringify(potentialConversion)
     const buffer = new Buffer.from(objectToString)

@@ -9,8 +9,9 @@ Node.js version uses the Buffer.from(objectToString) method to convert the objec
 ### Complex types support
 
 - Map
+- Set
 
-### Get size of a JavaScript object in Bytes - Browser 
+### Get size of a JavaScript object in Bytes - Browser
 
 For the browser, the calculation takes an object as an argument. It uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
 
@@ -18,8 +19,11 @@ Please note that this function will only work in some cases, especially when dea
 
 ### Coding standards
 
-Project uses [JavaScript Standard Style](https://standardjs.com/).
+Project follows [JavaScript Standard Style](https://standardjs.com/) as a JavaScript style guide.
 Code coverage reports done using Codecov.io.
+
+Code is written with the assumptions, that any code added, which is not tested properly, is already or will be buggy.
+Hence test coverage, with the BDD style unit tests, stating the intent, and expected behaviour, is a must.
 
 ### Get size of a JavaScript object in Bytes - version 1.x
 

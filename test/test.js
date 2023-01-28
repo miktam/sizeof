@@ -68,12 +68,23 @@ describe('sizeof', () => {
   })
 
   it('map support', () => {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
     const mapSmaller = new Map()
     mapSmaller.set('a', 1)
     const mapBigger = new Map()
     mapBigger.set('a', 1)
     mapBigger.set('b', 2)
-    console.log(sizeof(mapBigger), sizeof(mapSmaller))
     sizeof(mapBigger).should.be.above(sizeof(mapSmaller))
+  })
+
+  it('set support', () => {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+    const smallerSet = new Set()
+    smallerSet.add(1) // Set(1) { 1 }
+
+    const biggerSet = new Set()
+    biggerSet.add(1) // Set(1) { 1 }
+    biggerSet.add('some text') // Set(3) { 1, 5, 'some text' }
+    sizeof(biggerSet).should.be.above(sizeof(smallerSet))
   })
 })
