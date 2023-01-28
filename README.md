@@ -6,10 +6,11 @@
 
 Node.js version uses the Buffer.from(objectToString) method to convert the object's string representation to a buffer, and then it uses the byteLength property to obtain the buffer size in bytes.
 
-### Complex types support
+### Standard built in types support
 
 - Map
 - Set
+- BigInt
 
 ### Get size of a JavaScript object in Bytes - Browser
 
@@ -47,7 +48,7 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 import sizeof from 'object-sizeof'
 // const sizeof = require("object-sizeof")
 console.log("Object { abc: 'def' } in bytes: " + sizeof({ abc: 'def' })) // "Object { abc: 'def' } in bytes: 13"
-console.log("Integer 12345 in bytes: " + sizeof(12345)) // "Integer 12345 in bytes: 8"
+console.log('Integer 12345 in bytes: ' + sizeof(12345)) // "Integer 12345 in bytes: 8"
 ```
 
 ### Licence

@@ -87,4 +87,8 @@ describe('sizeof', () => {
     biggerSet.add('some text') // Set(3) { 1, 5, 'some text' }
     sizeof(biggerSet).should.be.above(sizeof(smallerSet))
   })
+
+  it('BigInt support', () => {
+    sizeof(BigInt(21474836480)).should.equal(11)
+  })
 })
