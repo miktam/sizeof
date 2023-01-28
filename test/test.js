@@ -66,4 +66,14 @@ describe('sizeof', () => {
   it('array support for NaN - longer array should have sizeof above the shorter one', () => {
     sizeof([NaN, NaN]).should.be.above(sizeof([NaN]))
   })
+
+  it('map support', () => {
+    const mapSmaller = new Map()
+    mapSmaller.set('a', 1)
+    const mapBigger = new Map()
+    mapBigger.set('a', 1)
+    mapBigger.set('b', 2)
+    console.log(sizeof(mapBigger), sizeof(mapSmaller))
+    sizeof(mapBigger).should.be.above(sizeof(mapSmaller))
+  })
 })

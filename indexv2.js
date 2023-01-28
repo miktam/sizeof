@@ -12,7 +12,13 @@ function objectSizeNode (obj) {
   let totalSize = 0
   const errorIndication = -1
   try {
-    const objectToString = JSON.stringify(obj)
+    // analyse the object to calculate it better
+    let potentialConversion = obj
+    if (obj instanceof Map) {
+      // convert the map to an object, including the nested properties
+      potentialConversion = Object.fromEntries(obj)
+    }
+    const objectToString = JSON.stringify(potentialConversion)
     const buffer = new Buffer.from(objectToString)
     totalSize = buffer.byteLength
   } catch (ex) {
