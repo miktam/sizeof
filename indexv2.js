@@ -57,6 +57,8 @@ function objectSizeBrowser (obj) {
       } else {
         bytes += (obj.toString().length - 8) * ECMA_SIZES.STRING
       }
+    } else if (typeof value === 'bigint') {
+      bytes += Buffer.from(value.toString()).byteLength
     } else if (typeof value === 'object' && objectList.indexOf(value) === -1) {
       objectList.push(value)
 
