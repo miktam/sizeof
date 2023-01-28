@@ -1,6 +1,6 @@
 ## object-sizeof
 
-[![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof) [![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg?token=qPHxmWpC1K)](https://codecov.io/gh/miktam/sizeof)
+[![Build](https://img.shields.io/npm/v/object-sizeof)](https://img.shields.io/npm/v/object-sizeof) [![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof) [![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg?token=qPHxmWpC1K)](https://codecov.io/gh/miktam/sizeof)
 
 ### Get size of a JavaScript object in Bytes - Node.js
 
@@ -9,8 +9,9 @@ Node.js version uses the Buffer.from(objectToString) method to convert the objec
 ### Complex types support
 
 - Map
+- Set
 
-### Get size of a JavaScript object in Bytes - Browser 
+### Get size of a JavaScript object in Bytes - Browser
 
 For the browser, the calculation takes an object as an argument. It uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
 
@@ -18,8 +19,11 @@ Please note that this function will only work in some cases, especially when dea
 
 ### Coding standards
 
-Project uses [JavaScript Standard Style](https://standardjs.com/).
+Project follows [JavaScript Standard Style](https://standardjs.com/) as a JavaScript style guide.
 Code coverage reports done using Codecov.io.
+
+Code is written with the assumptions, that any code added, which is not tested properly, is already or will be buggy.
+Hence test coverage, with the BDD style unit tests, stating the intent, and expected behaviour, is a must.
 
 ### Get size of a JavaScript object in Bytes - version 1.x
 
@@ -41,22 +45,9 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 
 ```javascript
 import sizeof from 'object-sizeof'
-
-// 2B per character, 6 chars total => 12B
-console.log(sizeof({ abc: 'def' }))
-
-// 8B for Number => 8B
-console.log(sizeof(12345))
-
-const param = {
-  a: 1,
-  b: 2,
-  c: {
-    d: 4
-  }
-}
-// 4 one two-bytes char strings and 3 eighth-bytes numbers => 32B
-console.log(sizeof(param))
+// const sizeof = require("object-sizeof")
+console.log("Object { abc: 'def' } in bytes: " + sizeof({ abc: 'def' })) // "Object { abc: 'def' } in bytes: 13"
+console.log("Integer 12345 in bytes: " + sizeof(12345)) // "Integer 12345 in bytes: 8"
 ```
 
 ### Licence
