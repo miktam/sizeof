@@ -2,14 +2,19 @@
 
 [![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof) [![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg?token=qPHxmWpC1K)](https://codecov.io/gh/miktam/sizeof)
 
-### Get size of a JavaScript object in Bytes - version 2.x
+### Get size of a JavaScript object in Bytes - Node.js
 
-New version uses the Buffer.from(objectToString) method to convert the string representation of the object to a buffer and then it uses the byteLength property to obtain the size of the buffer in bytes.
-Note that this method only work in Node.js environment.
+Node.js version uses the Buffer.from(objectToString) method to convert the object's string representation to a buffer, and then it uses the byteLength property to obtain the buffer size in bytes.
 
-For everything else, the calculation takes an object as an argument and uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
+### Complex types support
 
-Please note that this function will not work on all cases, specially when dealing with complex data structures or when the object contains functions.
+- Map
+
+### Get size of a JavaScript object in Bytes - Browser 
+
+For the browser, the calculation takes an object as an argument. It uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
+
+Please note that this function will only work in some cases, especially when dealing with complex data structures or when the object contains functions.
 
 ### Coding standards
 
@@ -33,30 +38,6 @@ Please note, that V8 which compiles the JavaScript into native machine code, is 
 `npm install object-sizeof`
 
 ### Examples
-
-#### ES5
-
-```javascript
-var sizeof = require('object-sizeof')
-
-// 2B per character, 6 chars total => 12B
-console.log(sizeof({ abc: 'def' }))
-
-// 8B for Number => 8B
-console.log(sizeof(12345))
-
-var param = {
-  a: 1,
-  b: 2,
-  c: {
-    d: 4
-  }
-}
-// 4 one two-bytes char strings and 3 eighth-bytes numbers => 32B
-console.log(sizeof(param))
-```
-
-#### ES6
 
 ```javascript
 import sizeof from 'object-sizeof'
