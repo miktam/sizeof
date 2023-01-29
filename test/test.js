@@ -91,4 +91,11 @@ describe('sizeof', () => {
   it('BigInt support', () => {
     sizeof(BigInt(21474836480)).should.equal(11)
   })
+
+  it('Function support', () => {
+    const func = (one, two) => {
+      return one + two
+    }
+    sizeof(func).should.equal(16)
+  })
 })

@@ -1,6 +1,7 @@
 // Copyright 2023 ChatGPT Jan 9 Version
 /* eslint-disable new-cap */ // to fix new Buffer.from
 'use strict'
+const util = require('util')
 const ECMA_SIZES = require('./byte_size')
 
 /**
@@ -32,11 +33,11 @@ function objectSizeNode (obj) {
 }
 
 /**
- * Size in bytes in a browser environment
+ * Size in bytes in a browser environment, and primitive types for both the browser and Node.js
  * @param {*} obj
  * @returns size in bytes
  */
-function objectSizeBrowser (obj) {
+function objectSize (obj) {
   const objectList = []
   const stack = [obj]
   let bytes = 0
@@ -59,6 +60,8 @@ function objectSizeBrowser (obj) {
       }
     } else if (typeof value === 'bigint') {
       bytes += Buffer.from(value.toString()).byteLength
+    } else if (typeof value === 'function') {
+      bytes += Buffer.byteLength(util.inspect(value), 'utf8')
     } else if (typeof value === 'object' && objectList.indexOf(value) === -1) {
       objectList.push(value)
 
@@ -91,7 +94,7 @@ module.exports = function (obj) {
   if (obj !== null && typeof obj === 'object' && isNodeEnvironment()) {
     totalSize = objectSizeNode(obj)
   } else {
-    totalSize = objectSizeBrowser(obj)
+    totalSize = objectSize(obj)
   }
 
   return totalSize
