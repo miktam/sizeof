@@ -2,22 +2,21 @@
 
 [![Build](https://img.shields.io/npm/v/object-sizeof)](https://img.shields.io/npm/v/object-sizeof) [![Build Status](https://travis-ci.org/miktam/sizeof.svg?branch=master)](https://travis-ci.org/miktam/sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof) [![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg?token=qPHxmWpC1K)](https://codecov.io/gh/miktam/sizeof)
 
-### Get size of a JavaScript object in Bytes - Node.js
+### Get size of a JavaScript object in Bytes
 
 Node.js version uses the Buffer.from(objectToString) method to convert the object's string representation to a buffer, and then it uses the byteLength property to obtain the buffer size in bytes.
 
-### Standard built in types support
+Module uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
+
+Please note that this function will only work in some cases, especially when dealing with complex data structures or when the object contains functions.
+
+### Supported Standard built-in and complex types
 
 - Map
 - Set
 - BigInt
-
-### Get size of a JavaScript object in Bytes - Browser
-
-For the browser, the calculation takes an object as an argument. It uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
-
-Please note that this function will only work in some cases, especially when dealing with complex data structures or when the object contains functions.
-
+- Function
+  
 ### Coding standards
 
 Project follows [JavaScript Standard Style](https://standardjs.com/) as a JavaScript style guide.
@@ -33,10 +32,6 @@ JavaScript does not provide sizeof (like in C), and programmer does not need to 
 However, according to [ECMAScript Language Specification](http://www.ecma-international.org/ecma-262/5.1/), each String value is represented by 16-bit unsigned integer, Number uses the double-precision 64-bit format IEEE 754 values including the special "Not-a-Number" (NaN) values, positive infinity, and negative infinity.
 
 Having this knowledge, the module calculates how much memory object will allocate.
-
-### Limitations
-
-Please note, that V8 which compiles the JavaScript into native machine code, is not taken into account, as the compiled code is additionally heavily optimized.
 
 ### Installation
 
