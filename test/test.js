@@ -98,4 +98,11 @@ describe('sizeof', () => {
     }
     sizeof(func).should.equal(16)
   })
+
+  it('nested objects', () => {
+    const obj = { a: 1, b: 2, c: 3 }
+    sizeof(obj).should.be.equal(19)
+    const nested = { d: obj }
+    sizeof(nested).should.be.equal(25)
+  })
 })

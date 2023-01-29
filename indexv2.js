@@ -5,11 +5,11 @@ const util = require('util')
 const ECMA_SIZES = require('./byte_size')
 
 /**
- * Size in bytes in a Node.js environment
+ * Size in bytes for complex objects
  * @param {*} obj
  * @returns size in bytes, or -1 if JSON.stringify threw an exception
  */
-function objectSizeNode (obj) {
+function objectSizeComplex (obj) {
   let totalSize = 0
   const errorIndication = -1
   try {
@@ -33,11 +33,11 @@ function objectSizeNode (obj) {
 }
 
 /**
- * Size in bytes in a browser environment, and primitive types for both the browser and Node.js
+ * Size in bytes for primitive types
  * @param {*} obj
  * @returns size in bytes
  */
-function objectSize (obj) {
+function objectSizeSimple (obj) {
   const objectList = []
   const stack = [obj]
   let bytes = 0
@@ -73,28 +73,13 @@ function objectSize (obj) {
   return bytes
 }
 
-/**
- * Are we running in a Node.js environment
- * @returns boolean
- */
-function isNodeEnvironment () {
-  if (
-    typeof process !== 'undefined' &&
-    process.versions &&
-    process.versions.node
-  ) {
-    return true
-  }
-  return false
-}
-
 module.exports = function (obj) {
   let totalSize = 0
 
-  if (obj !== null && typeof obj === 'object' && isNodeEnvironment()) {
-    totalSize = objectSizeNode(obj)
+  if (obj !== null && typeof obj === 'object') {
+    totalSize = objectSizeComplex(obj)
   } else {
-    totalSize = objectSize(obj)
+    totalSize = objectSizeSimple(obj)
   }
 
   return totalSize
