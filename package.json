@@ -25,11 +25,16 @@
     "buffer": "^6.0.3"
   },
   "devDependencies": {
-    "mocha": "^10.2.0",
-    "should": "^13.2.3",
-    "standard": "^17.0.0",
     "codecov": "^3.8.3",
-    "nyc": "^15.1.0"
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "should": "^13.2.3",
+    "standard": "^17.0.0"
   },
-  "types": "indexv2.d.ts"
+  "types": "indexv2.d.ts",
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  }
 }
