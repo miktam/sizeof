@@ -5,7 +5,7 @@
 const should = require('should')
 const sizeof = require('../indexv2.js')
 
-describe('sizeof', () => {
+describe('sizeof node.js tests', () => {
   it('should handle null in object keys', () => {
     const badData = { 1: { depot_id: null, hierarchy_node_id: null } }
     sizeof(badData).should.be.instanceOf(Number)
@@ -104,5 +104,23 @@ describe('sizeof', () => {
     sizeof(obj).should.be.equal(19)
     const nested = { d: obj }
     sizeof(nested).should.be.equal(25)
+  })
+})
+
+describe('sizeof browser tests', function () {
+  const versions = global.process.versions
+  before(function () {
+    delete global.process.versions
+  })
+
+  after(function () {
+    global.process.versions = versions
+  })
+
+  it('Function support', () => {
+    const func = (one, two) => {
+      return one + two
+    }
+    sizeof(func).should.equal(44)
   })
 })
