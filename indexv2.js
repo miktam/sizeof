@@ -3,15 +3,6 @@
 'use strict'
 const ECMA_SIZES = require('./byte_size')
 
-/** Is Node.js environment */
-function isNode () {
-  return (
-    typeof process === 'object' &&
-    typeof process.versions === 'object' &&
-    typeof process.versions.node !== 'undefined'
-  )
-}
-
 /**
  * Size in bytes for complex objects
  * @param {*} obj
@@ -69,12 +60,7 @@ function objectSizeSimple (obj) {
     } else if (typeof value === 'bigint') {
       bytes += Buffer.from(value.toString()).byteLength
     } else if (typeof value === 'function') {
-      if (isNode()) {
-        const util = require('util')
-        bytes += Buffer.byteLength(util.inspect(value), 'utf8')
-      } else {
-        bytes += value.toString().length
-      }
+      bytes += value.toString().length
     } else if (typeof value === 'object' && objectList.indexOf(value) === -1) {
       objectList.push(value)
 
