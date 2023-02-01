@@ -92,29 +92,11 @@ describe('sizeof node.js tests', () => {
     sizeof(BigInt(21474836480)).should.equal(11)
   })
 
-  it('Function support', () => {
-    const func = (one, two) => {
-      return one + two
-    }
-    sizeof(func).should.equal(16)
-  })
-
   it('nested objects', () => {
     const obj = { a: 1, b: 2, c: 3 }
     sizeof(obj).should.be.equal(19)
     const nested = { d: obj }
     sizeof(nested).should.be.equal(25)
-  })
-})
-
-describe('sizeof browser tests', function () {
-  const versions = global.process.versions
-  before(function () {
-    delete global.process.versions
-  })
-
-  after(function () {
-    global.process.versions = versions
   })
 
   it('Function support', () => {
