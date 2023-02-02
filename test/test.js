@@ -23,8 +23,12 @@ describe('sizeof node.js tests', () => {
     sizeof().should.be.equal(0)
   })
 
-  it('of 3 chars string is 6', () => {
-    sizeof('abc').should.be.equal(6)
+  it('of 3 chars string is 16 in node.js', () => {
+    sizeof('abc').should.be.equal(16)
+  })
+
+  it('sizeof of empty string', () => {
+    sizeof('').should.be.equal(12)
   })
 
   it('boolean size shall be 4', () => {
@@ -104,5 +108,21 @@ describe('sizeof node.js tests', () => {
       return one + two
     }
     sizeof(func).should.equal(44)
+  })
+})
+
+describe('sizeof browser tests', () => {
+  beforeEach(function () {
+    global.window = {}
+    global.document = {}
+  })
+
+  it('each caracter is two bytes in a browser environent', () => {
+    sizeof('abc').should.be.equal(6)
+  })
+
+  afterEach(function () {
+    delete global.window
+    delete global.document
   })
 })

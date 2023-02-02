@@ -4,6 +4,26 @@
 const ECMA_SIZES = require('./byte_size')
 
 /**
+ * Precisely calculate size of string in node
+ * Based on https://stackoverflow.com/questions/68789144/how-much-memory-do-v8-take-to-store-a-string/68791382#68791382
+ * @param {} str
+ */
+function preciseStringSizeNode (str) {
+  return 12 + 4 * Math.ceil(str.length / 4)
+}
+
+/**
+ * In the browser environment, window and document are defined as global objects
+ * @returns true if its a Node.js env, false if it is a browser
+ */
+function isNodeEnvironment () {
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    return false
+  }
+  return true
+}
+
+/**
  * Size in bytes for complex objects
  * @param {*} obj
  * @returns size in bytes, or -1 if JSON.stringify threw an exception
@@ -47,7 +67,11 @@ function objectSizeSimple (obj) {
     if (typeof value === 'boolean') {
       bytes += ECMA_SIZES.BYTES
     } else if (typeof value === 'string') {
-      bytes += value.length * ECMA_SIZES.STRING
+      if (isNodeEnvironment()) {
+        bytes += preciseStringSizeNode(value)
+      } else {
+        bytes += value.length * ECMA_SIZES.STRING
+      }
     } else if (typeof value === 'number') {
       bytes += ECMA_SIZES.NUMBER
     } else if (typeof value === 'symbol') {
