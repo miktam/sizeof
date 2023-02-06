@@ -95,8 +95,25 @@ describe('sizeof node.js tests', () => {
   it('typed array support', () => {
     const arrayInt8Array = new Int8Array([1, 2, 3, 4, 5])
     sizeof(arrayInt8Array).should.equal(5)
+
+    const arrayUint8Array = new Uint8Array([1, 2, 3, 4, 5])
+    sizeof(arrayUint8Array).should.equal(5)
+
+    const arrayUint16Array = new Uint16Array([1, 2, 3, 4, 5])
+    sizeof(arrayUint16Array).should.equal(10)
+
+    const arrayInt16Array = new Int16Array([1, 2, 3, 4, 5])
+    sizeof(arrayInt16Array).should.equal(10)
+
     const arrayUint32Array = new Uint32Array([1, 2, 3, 4, 5])
     sizeof(arrayUint32Array).should.equal(20)
+
+    const arrayInt32Array = new Int32Array([1, 2, 3, 4, 5])
+    sizeof(arrayInt32Array).should.equal(20)
+
+    const arrayFloat32Array = new Float32Array([1, 2, 3, 4, 5])
+    sizeof(arrayFloat32Array).should.equal(20)
+
     const arrayFloat64 = new Float64Array([1, 2, 3, 4, 5])
     sizeof(arrayFloat64).should.equal(40)
   })
