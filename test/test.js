@@ -92,6 +92,15 @@ describe('sizeof node.js tests', () => {
     sizeof(biggerSet).should.be.above(sizeof(smallerSet))
   })
 
+  it('typed array support', () => {
+    const arrayInt8Array = new Int8Array([1, 2, 3, 4, 5])
+    sizeof(arrayInt8Array).should.equal(5)
+    const arrayUint32Array = new Uint32Array([1, 2, 3, 4, 5])
+    sizeof(arrayUint32Array).should.equal(20)
+    const arrayFloat64 = new Float64Array([1, 2, 3, 4, 5])
+    sizeof(arrayFloat64).should.equal(40)
+  })
+
   it('BigInt support', () => {
     sizeof(BigInt(21474836480)).should.equal(11)
   })
