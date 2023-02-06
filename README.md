@@ -16,6 +16,7 @@ Please note that this function will only work in some cases, especially when dea
 - Set
 - BigInt
 - Function
+- Typed Arrays (Int8Array, Uint32Array, Float64Array, etc)
 
 ### Coding standards
 
@@ -40,10 +41,12 @@ Having this knowledge, the module calculates how much memory object will allocat
 ### Examples
 
 ```javascript
-import sizeof from 'object-sizeof'
-// const sizeof = require("object-sizeof")
-console.log("Object { abc: 'def' } in bytes: " + sizeof({ abc: 'def' })) // "Object { abc: 'def' } in bytes: 13"
-console.log('Integer 12345 in bytes: ' + sizeof(12345)) // "Integer 12345 in bytes: 8"
+// import sizeof from 'object-sizeof'
+const sizeof = require('object-sizeof')
+const sizeObj = sizeof({ abc: 'def' })
+console.log(`Size of the object: ${sizeObj} bytes`)
+const sizeInt = sizeof(12345)
+console.log(`Size of the int: ${sizeInt} bytes`)
 ```
 
 ### Licence

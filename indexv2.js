@@ -41,6 +41,23 @@ function objectSizeComplex (obj) {
       // convert the set to an array
       potentialConversion = Array.from(obj)
     }
+    if (obj instanceof Int8Array) {
+      return obj.length * ECMA_SIZES.Int8Array
+    } else if (obj instanceof Uint8Array || obj instanceof Uint8ClampedArray) {
+      return obj.length * ECMA_SIZES.Uint8Array
+    } else if (obj instanceof Int16Array) {
+      return obj.length * ECMA_SIZES.Int16Array
+    } else if (obj instanceof Uint16Array) {
+      return obj.length * ECMA_SIZES.Uint16Array
+    } else if (obj instanceof Int32Array) {
+      return obj.length * ECMA_SIZES.Int32Array
+    } else if (obj instanceof Uint32Array) {
+      return obj.length * ECMA_SIZES.Uint32Array
+    } else if (obj instanceof Float32Array) {
+      return obj.length * ECMA_SIZES.Float32Array
+    } else if (obj instanceof Float64Array) {
+      return obj.length * ECMA_SIZES.Float64Array
+    }
     const objectToString = JSON.stringify(potentialConversion)
     const buffer = new Buffer.from(objectToString)
     totalSize = buffer.byteLength
