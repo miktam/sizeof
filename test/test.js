@@ -143,8 +143,8 @@ describe('sizeof browser tests', () => {
     global.document = {}
   })
 
-  it('each caracter is two bytes in a browser environent', () => {
-    sizeof('abc').should.be.equal(6)
+  it('in a browser environent string', () => {
+    sizeof('abc').should.be.equal(3)
   })
 
   afterEach(function () {

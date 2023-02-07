@@ -87,7 +87,7 @@ function objectSizeSimple (obj) {
       if (isNodeEnvironment()) {
         bytes += preciseStringSizeNode(value)
       } else {
-        bytes += value.length * ECMA_SIZES.STRING
+        bytes += new TextEncoder().encode(value).length
       }
     } else if (typeof value === 'number') {
       bytes += ECMA_SIZES.NUMBER
