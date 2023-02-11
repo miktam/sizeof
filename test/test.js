@@ -3,7 +3,10 @@
 /* global describe, it */
 
 const should = require('should')
+const v8 = require('v8')
 const sizeof = require('../indexv2.js')
+const LONG_STRING =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vestibulum lacus, sit amet maximus libero. Aliquam erat volutpat. Quisque at orci tortor. Donec at mi nunc.'
 
 describe('sizeof node.js tests', () => {
   it('should handle null in object keys', () => {
@@ -23,12 +26,19 @@ describe('sizeof node.js tests', () => {
     sizeof().should.be.equal(0)
   })
 
-  it('of 3 chars string is 16 in node.js', () => {
-    sizeof('abc').should.be.equal(16)
+  it('of 3 chars string is 3 bytes in node.js', () => {
+    const abcString = 'abc'
+    sizeof(abcString).should.be.equal(3)
   })
 
   it('sizeof of empty string', () => {
-    sizeof('').should.be.equal(12)
+    const emptyString = ''
+    sizeof(emptyString).should.be.equal(v8.serialize(emptyString).byteLength)
+    sizeof(emptyString).should.be.equal(4)
+  })
+
+  it('sizeof of a long string', () => {
+    sizeof(LONG_STRING).should.be.equal(171)
   })
 
   it('boolean size shall be 4', () => {
@@ -143,8 +153,12 @@ describe('sizeof browser tests', () => {
     global.document = {}
   })
 
-  it('each caracter is two bytes in a browser environent', () => {
-    sizeof('abc').should.be.equal(6)
+  it('in a browser environent string', () => {
+    sizeof('abc').should.be.equal(3)
+  })
+
+  it('sizeof of a long string', () => {
+    sizeof(LONG_STRING).should.be.equal(171)
   })
 
   afterEach(function () {

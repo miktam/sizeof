@@ -6,11 +6,13 @@ const Buffer = require('buffer/').Buffer
 
 /**
  * Precisely calculate size of string in node
- * Based on https://stackoverflow.com/questions/68789144/how-much-memory-do-v8-take-to-store-a-string/68791382#68791382
  * @param {} str
  */
 function preciseStringSizeNode (str) {
-  return 12 + 4 * Math.ceil(str.length / 4)
+  if (str === '') {
+    return 4
+  }
+  return new Buffer.from(str).byteLength
 }
 
 /**
@@ -88,7 +90,7 @@ function objectSizeSimple (obj) {
       if (isNodeEnvironment()) {
         bytes += preciseStringSizeNode(value)
       } else {
-        bytes += value.length * ECMA_SIZES.STRING
+        bytes += new TextEncoder().encode(value).length
       }
     } else if (typeof value === 'number') {
       bytes += ECMA_SIZES.NUMBER
