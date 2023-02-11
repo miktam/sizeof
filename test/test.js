@@ -3,6 +3,7 @@
 /* global describe, it */
 
 const should = require('should')
+const v8 = require('v8')
 const sizeof = require('../indexv2.js')
 
 describe('sizeof node.js tests', () => {
@@ -23,12 +24,20 @@ describe('sizeof node.js tests', () => {
     sizeof().should.be.equal(0)
   })
 
-  it('of 3 chars string is 16 in node.js', () => {
-    sizeof('abc').should.be.equal(16)
+  it('of 3 chars string is 3 bytes in node.js', () => {
+    const abcString = 'abc'
+    sizeof(abcString).should.be.equal(3)
   })
 
   it('sizeof of empty string', () => {
-    sizeof('').should.be.equal(12)
+    sizeof('').should.be.equal(v8.serialize('').byteLength)
+    sizeof('').should.be.equal(4)
+  })
+
+  it('sizeof of a long string', () => {
+    sizeof(
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vestibulum lacus, sit amet maximus libero. Aliquam erat volutpat. Quisque at orci tortor. Donec at mi nunc.'
+    ).should.be.equal(171)
   })
 
   it('boolean size shall be 4', () => {
