@@ -5,6 +5,8 @@
 const should = require('should')
 const v8 = require('v8')
 const sizeof = require('../indexv2.js')
+const LONG_STRING =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vestibulum lacus, sit amet maximus libero. Aliquam erat volutpat. Quisque at orci tortor. Donec at mi nunc.'
 
 describe('sizeof node.js tests', () => {
   it('should handle null in object keys', () => {
@@ -30,14 +32,13 @@ describe('sizeof node.js tests', () => {
   })
 
   it('sizeof of empty string', () => {
-    sizeof('').should.be.equal(v8.serialize('').byteLength)
-    sizeof('').should.be.equal(4)
+    const emptyString = ''
+    sizeof(emptyString).should.be.equal(v8.serialize(emptyString).byteLength)
+    sizeof(emptyString).should.be.equal(4)
   })
 
   it('sizeof of a long string', () => {
-    sizeof(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vestibulum lacus, sit amet maximus libero. Aliquam erat volutpat. Quisque at orci tortor. Donec at mi nunc.'
-    ).should.be.equal(171)
+    sizeof(LONG_STRING).should.be.equal(171)
   })
 
   it('boolean size shall be 4', () => {
@@ -154,6 +155,10 @@ describe('sizeof browser tests', () => {
 
   it('in a browser environent string', () => {
     sizeof('abc').should.be.equal(3)
+  })
+
+  it('sizeof of a long string', () => {
+    sizeof(LONG_STRING).should.be.equal(171)
   })
 
   afterEach(function () {
