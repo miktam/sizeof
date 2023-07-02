@@ -122,6 +122,37 @@ describe('sizeof node.js tests', () => {
     sizeof(BigInt(21474836480)).should.equal(11)
   })
 
+  it('BigInt support in objects', () => {
+    const nestedBigInt = {
+      num: BigInt(123123123123123123n)
+    }
+    sizeof(nestedBigInt).should.equal(28)
+  })
+
+  it('function support in objects', () => {
+    const nestedFunction = {
+      func: x => {
+        return x + x
+      }
+    }
+    sizeof(nestedFunction).should.equal(48)
+  })
+
+  it('nested support in objects', () => {
+    const nestedUndefined = {
+      undef: undefined
+    }
+    sizeof(nestedUndefined).should.equal(21)
+  })
+
+  it('should handle nested symbols', () => {
+    sizeof({ symbol: Symbol('test') }).should.equal(25)
+  })
+
+  it('should handle nested regex', () => {
+    sizeof({ regex: /test/g }).should.equal(19)
+  })
+
   it('nested objects', () => {
     const obj = { a: 1, b: 2, c: 3 }
     sizeof(obj).should.be.equal(19)

@@ -1,6 +1,6 @@
 {
   "name": "object-sizeof",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "Sizeof of a JavaScript object in Bytes",
   "main": "indexv2.js",
   "scripts": {
@@ -12,12 +12,7 @@
     "type": "git",
     "url": "git://github.com/miktam/sizeof.git"
   },
-  "keywords": [
-    "sizeof",
-    "size",
-    "object",
-    "bytes"
-  ],
+  "keywords": ["sizeof", "size", "object", "bytes"],
   "author": "Andrei Karpushonak",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -29,12 +24,10 @@
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "should": "^13.2.3",
-    "standard": "^17.0.0"
+    "standard": "^17.1.0"
   },
   "types": "indexv2.d.ts",
   "standard": {
-    "env": [
-      "mocha"
-    ]
+    "env": ["mocha"]
   }
 }

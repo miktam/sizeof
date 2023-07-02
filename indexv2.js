@@ -59,7 +59,29 @@ function objectSizeComplex (obj) {
     } else if (obj instanceof Float64Array) {
       return obj.length * ECMA_SIZES.Float64Array
     }
-    const objectToString = JSON.stringify(potentialConversion)
+
+    const objCopy = JSON.parse(
+      JSON.stringify(potentialConversion, (key, value) => {
+        if (typeof value === 'bigint') {
+          return value.toString()
+        } else if (typeof value === 'function') {
+          return value.toString()
+        } else if (typeof value === 'undefined') {
+          return 'undefined'
+        } else if (typeof value === 'symbol') {
+          return value.toString()
+        } else if (value instanceof RegExp) {
+          return value.toString()
+        } else if (value instanceof Map) {
+          return Array.from(value.entries())
+        } else if (value instanceof Set) {
+          return Array.from(value)
+        } else {
+          return value
+        }
+      })
+    )
+    const objectToString = JSON.stringify(objCopy)
     const buffer = new Buffer.from(objectToString)
     totalSize = buffer.byteLength
   } catch (ex) {
