@@ -166,6 +166,10 @@ describe('sizeof node.js tests', () => {
     }
     sizeof(func).should.equal(44)
   })
+
+  it('should calculate size for global symbols', () => {
+    sizeof(Symbol.for('testKey')).should.equal(14)
+  })
 })
 
 describe('sizeof browser tests', () => {
