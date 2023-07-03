@@ -1,4 +1,4 @@
-// Copyright 2023 ChatGPT Jan 9 Version
+// Copyright 2023 ChatGPT May 24 Version
 /* eslint-disable new-cap */ // to fix new Buffer.from
 'use strict'
 const ECMA_SIZES = require('./byte_size')
@@ -24,6 +24,13 @@ function isNodeEnvironment () {
   return true
 }
 
+function getSizeOfTypedArray (typedArray) {
+  if (typedArray.BYTES_PER_ELEMENT) {
+    return typedArray.length * typedArray.BYTES_PER_ELEMENT
+  }
+  return -1 // error indication
+}
+
 /**
  * Size in bytes for complex objects
  * @param {*} obj
@@ -32,40 +39,43 @@ function isNodeEnvironment () {
 function objectSizeComplex (obj) {
   let totalSize = 0
   const errorIndication = -1
+
   try {
-    // analyse the object to calculate it better
-    let potentialConversion = obj
+    // convert Map and Set to an object representation
+    let convertedObj = obj
     if (obj instanceof Map) {
-      // convert the map to an object
-      potentialConversion = Object.fromEntries(obj)
+      convertedObj = Object.fromEntries(obj)
     } else if (obj instanceof Set) {
-      // convert the set to an array
-      potentialConversion = Array.from(obj)
+      convertedObj = Array.from(obj)
     }
-    if (obj instanceof Int8Array) {
-      return obj.length * ECMA_SIZES.Int8Array
-    } else if (obj instanceof Uint8Array || obj instanceof Uint8ClampedArray) {
-      return obj.length * ECMA_SIZES.Uint8Array
-    } else if (obj instanceof Int16Array) {
-      return obj.length * ECMA_SIZES.Int16Array
-    } else if (obj instanceof Uint16Array) {
-      return obj.length * ECMA_SIZES.Uint16Array
-    } else if (obj instanceof Int32Array) {
-      return obj.length * ECMA_SIZES.Int32Array
-    } else if (obj instanceof Uint32Array) {
-      return obj.length * ECMA_SIZES.Uint32Array
-    } else if (obj instanceof Float32Array) {
-      return obj.length * ECMA_SIZES.Float32Array
-    } else if (obj instanceof Float64Array) {
-      return obj.length * ECMA_SIZES.Float64Array
+
+    // handle typed arrays
+    if (ArrayBuffer.isView(obj)) {
+      return getSizeOfTypedArray(obj)
     }
-    const objectToString = JSON.stringify(potentialConversion)
-    const buffer = new Buffer.from(objectToString)
-    totalSize = buffer.byteLength
+
+    const serializedObj = JSON.stringify(convertedObj, (key, value) => {
+      if (typeof value === 'bigint') {
+        return value.toString()
+      } else if (typeof value === 'function') {
+        return value.toString()
+      } else if (typeof value === 'undefined') {
+        return 'undefined'
+      } else if (typeof value === 'symbol') {
+        return value.toString()
+      } else if (value instanceof RegExp) {
+        return value.toString()
+      } else {
+        return value
+      }
+    })
+
+    totalSize = Buffer.byteLength(serializedObj, 'utf8')
   } catch (ex) {
-    console.error('Error detected, return ' + errorIndication, ex)
+    console.error('Error detected, returning ' + errorIndication, ex)
     return errorIndication
   }
+
   return totalSize
 }
 
