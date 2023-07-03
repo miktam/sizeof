@@ -2,11 +2,11 @@
 
 [![Build](https://img.shields.io/npm/v/object-sizeof)](https://img.shields.io/npm/v/object-sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof) [![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg?token=qPHxmWpC1K)](https://codecov.io/gh/miktam/sizeof)
 
-### Get size of a JavaScript object in Bytes
+### Get the size of a JavaScript object in Bytes
 
 Node.js version uses the Buffer.from(objectToString) method to convert the object's string representation to a buffer, and then it uses the byteLength property to obtain the buffer size in bytes.
 
-Module uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
+The module uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
 
 Please note that this function will only work in some cases, especially when dealing with complex data structures or when the object contains functions.
 
@@ -20,10 +20,10 @@ Please note that this function will only work in some cases, especially when dea
 
 ### Coding standards
 
-Project follows [JavaScript Standard Style](https://standardjs.com/) as a JavaScript style guide.
-Code coverage reports done using Codecov.io.
+The project follows [JavaScript Standard Style](https://standardjs.com/) as a JavaScript style guide.
+Code coverage reports are done using Codecov.io.
 
-Code is written with the assumptions, that any code added, which is not tested properly, is already or will be buggy.
+Code is written with the assumptions that any code added, which is not tested properly, is already or will be buggy.
 Hence test coverage, with the BDD style unit tests, stating the intent, and expected behaviour, is a must.
 
 ### Get size of a JavaScript object in Bytes - version 1.x
