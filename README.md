@@ -18,6 +18,15 @@ Please note that this function will only work in some cases, especially when dea
 - Function
 - Typed Arrays (Int8Array, Uint32Array, Float64Array, etc)
 
+### Error handling
+
+Errors indicated by returned -1 in following cases:
+
+- JSON serialization error, e.g. circular references.
+- Unrecognizable TypedArray object.
+
+It prevents potential exceptions or infinite loops, improving reliability.
+
 ### Coding standards
 
 The project follows [JavaScript Standard Style](https://standardjs.com/) as a JavaScript style guide.
