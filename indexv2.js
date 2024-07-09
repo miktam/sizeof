@@ -2,7 +2,7 @@
 /* eslint-disable new-cap */ // to fix new Buffer.from
 'use strict'
 const ECMA_SIZES = require('./byte_size')
-const Buffer = require('buffer/').Buffer
+const Buffer = typeof window !== 'undefined' ? require('buffer/').Buffer : global.Buffer
 
 /**
  * Precisely calculate size of string in node
