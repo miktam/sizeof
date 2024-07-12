@@ -11,6 +11,11 @@ describe('sizeof node.js tests', () => {
     sizeof(badData).should.be.instanceOf(Number)
   })
 
+  it('should handle null in object keys', () => {
+    const badData = { 1: { depot_id: null, hierarchy_node_id: null } }
+    sizeof(badData).should.be.instanceOf(Number)
+  })
+
   it('null is 0', () => {
     sizeof(null).should.be.equal(0)
   })
