@@ -2,7 +2,7 @@
 
 /* global describe, it */
 
-const should = require('should')
+require('should')
 const sizeof = require('../indexv2.js')
 
 describe('sizeof node.js tests', () => {
@@ -44,7 +44,8 @@ describe('sizeof node.js tests', () => {
     const firstLevel = { a: 1 }
     const secondLevel = { b: 2, c: firstLevel }
     firstLevel.second = secondLevel
-    should.exist(sizeof(firstLevel))
+    // 2.x returns an Error object (message '-1'); dependents rely on it
+    sizeof(firstLevel).should.be.instanceOf(Error).and.have.property('message', '-1')
   })
 
   it('handle hasOwnProperty key', () => {
@@ -190,5 +191,75 @@ describe('sizeof browser tests', () => {
   afterEach(function () {
     delete global.window
     delete global.document
+  })
+})
+
+describe('sizeof outside of Node.js', () => {
+  const fs = require('fs')
+  const path = require('path')
+  const vm = require('vm')
+
+  // Loads indexv2.js with only the globals a web worker has: no window,
+  // no document, no global, and no npm packages to require
+  function loadInWorkerScope (globals) {
+    const module = { exports: {} }
+    const context = vm.createContext({
+      ...globals,
+      self: {},
+      module,
+      exports: module.exports,
+      require: (id) => {
+        if (id === './byte_size') return require('../byte_size')
+        throw new Error(`unexpected require('${id}')`)
+      }
+    })
+    const source = fs.readFileSync(path.join(__dirname, '..', 'indexv2.js'), 'utf8')
+    vm.runInContext(source, context)
+    return module.exports
+  }
+
+  it('works in a web worker scope, counting UTF-8 without Buffer', () => {
+    const workerSizeof = loadInWorkerScope()
+    const values = ['abc', { a: 'ж', b: [1, 2n] }, { emoji: '😀🏳️‍🌈', cjk: '中文' }, ['\ud800x\udc00', '\ud83d']]
+    for (const value of values) {
+      workerSizeof(value).should.be.equal(sizeof(value))
+    }
+  })
+
+  it('ignores a Buffer polyfill installed as a global in a browser', () => {
+    const polyfill = { byteLength () { throw new Error('polyfill used') } }
+    // browser bundles often polyfill process too, without versions.node
+    const browserSizeof = loadInWorkerScope({ Buffer: polyfill, process: { env: {}, versions: {} } })
+    browserSizeof({ text: 'x'.repeat(100) }).should.be.equal(sizeof({ text: 'x'.repeat(100) }))
+  })
+
+  it('loads when reading process.versions throws', () => {
+    const tampered = { get versions () { throw new Error('tampered') } }
+    const tamperedSizeof = loadInWorkerScope({ process: tampered })
+    tamperedSizeof({ text: 'x'.repeat(100) }).should.be.equal(sizeof({ text: 'x'.repeat(100) }))
+  })
+
+  it('counts UTF-8 bytes like Buffer.byteLength', () => {
+    const values = [{ cyrillic: 'привет' }, { emoji: '😀🏳️‍🌈' }, { lone: '\ud800x\udc00' }, ['a', 'é', '中']]
+    for (const value of values) {
+      sizeof(value).should.be.equal(Buffer.byteLength(JSON.stringify(value), 'utf8'))
+    }
+  })
+})
+
+describe('module formats', () => {
+  it('exposes the function as default for transpiled ES imports', () => {
+    sizeof.default.should.be.equal(sizeof)
+  })
+})
+
+describe('package', () => {
+  it('publishes only the library files', function () {
+    this.timeout(30000)
+    const { execFileSync } = require('child_process')
+    const path = require('path')
+    const output = execFileSync('npm', ['pack', '--dry-run', '--json'], { cwd: path.join(__dirname, '..') })
+    const files = JSON.parse(output)[0].files.map(file => file.path).sort()
+    files.should.eql(['LICENSE.md', 'README.md', 'byte_size.js', 'index.d.ts', 'index.js', 'indexv2.d.ts', 'indexv2.js', 'package.json', 'ts40/indexv2.d.ts'])
   })
 })
