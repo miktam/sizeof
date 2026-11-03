@@ -1,9 +1,54 @@
 // Copyright 2023 ChatGPT May 24 Version
-/* eslint-disable new-cap */ // to fix new Buffer.from
 'use strict'
 const ECMA_SIZES = require('./byte_size')
-const Buffer =
-  typeof window !== 'undefined' ? require('buffer/').Buffer : global.Buffer
+
+// Node.js's own Buffer, read off globalThis so that bundlers do not inject
+// a Buffer polyfill. Only trusted on Node.js: browser apps often install the
+// npm `buffer` polyfill as a global, and its byteLength copies the string.
+const NodeBuffer = (function () {
+  try {
+    const g = typeof globalThis !== 'undefined' ? globalThis : null
+    const isNode = g !== null && g.process && g.process.versions && g.process.versions.node
+    return isNode && g.Buffer && typeof g.Buffer.byteLength === 'function' ? g.Buffer : null
+  } catch (ex) {
+    // a tampered `process` must not stop the module from loading
+    return null
+  }
+})()
+
+/**
+ * Number of bytes in the UTF-8 encoding of a string. Uses Buffer.byteLength
+ * in Node.js; elsewhere counts in plain JS without allocating the encoded
+ * copy, so no Buffer polyfill is needed.
+ * Unpaired surrogates count as 3 bytes, as with Buffer and TextEncoder,
+ * which replace them with U+FFFD.
+ * @param {string} str
+ */
+function utf8ByteLength (str) {
+  if (NodeBuffer) {
+    return NodeBuffer.byteLength(str, 'utf8')
+  }
+  let bytes = 0
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i)
+    if (code < 0x80) {
+      bytes += 1
+    } else if (code < 0x800) {
+      bytes += 2
+    } else if (code >= 0xd800 && code <= 0xdbff && i + 1 < str.length) {
+      const next = str.charCodeAt(i + 1)
+      if (next >= 0xdc00 && next <= 0xdfff) {
+        bytes += 4
+        i++
+      } else {
+        bytes += 3
+      }
+    } else {
+      bytes += 3
+    }
+  }
+  return bytes
+}
 
 /**
  * Precisely calculate size of string in node
@@ -71,7 +116,7 @@ function objectSizeComplex (obj) {
       }
     })
 
-    totalSize = Buffer.byteLength(serializedObj, 'utf8')
+    totalSize = utf8ByteLength(serializedObj)
   } catch (ex) {
     // do not log anyting to console.error
     return new Error(errorIndication)
@@ -111,7 +156,7 @@ function objectSizeSimple (obj) {
         bytes += (obj.toString().length - 8) * ECMA_SIZES.STRING
       }
     } else if (typeof value === 'bigint') {
-      bytes += Buffer.from(value.toString()).byteLength
+      bytes += utf8ByteLength(value.toString())
     } else if (typeof value === 'function') {
       bytes += value.toString().length
     } else if (typeof value === 'object' && objectList.indexOf(value) === -1) {
@@ -125,7 +170,7 @@ function objectSizeSimple (obj) {
   return bytes
 }
 
-module.exports = function (obj) {
+function sizeof (obj) {
   let totalSize = 0
 
   if (obj !== null && typeof obj === 'object') {
@@ -136,3 +181,7 @@ module.exports = function (obj) {
 
   return totalSize
 }
+
+module.exports = sizeof
+// lets `import sizeof from 'object-sizeof'` work when compiled to CommonJS without esModuleInterop
+module.exports.default = sizeof

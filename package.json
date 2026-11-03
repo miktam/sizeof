@@ -1,6 +1,6 @@
 {
   "name": "object-sizeof",
-  "version": "2.6.5",
+  "version": "2.7.0",
   "description": "Sizeof of a JavaScript object in Bytes",
   "main": "indexv2.js",
   "scripts": {
@@ -26,12 +26,27 @@
   },
   "devDependencies": {
     "codecov": "^3.8.3",
-    "mocha": "^10.6.0",
+    "mocha": "^11.8.0",
     "nyc": "^17.0.0",
     "should": "^13.2.3",
     "standard": "^17.1.0"
   },
   "types": "indexv2.d.ts",
+  "typesVersions": {
+    "<4.1": {
+      "indexv2.d.ts": [
+        "ts40/indexv2.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "byte_size.js",
+    "index.js",
+    "index.d.ts",
+    "indexv2.js",
+    "indexv2.d.ts",
+    "ts40/indexv2.d.ts"
+  ],
   "standard": {
     "env": [
       "mocha"

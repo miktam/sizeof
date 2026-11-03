@@ -4,28 +4,22 @@
 
 ### Get the size of a JavaScript object in Bytes
 
-Node.js version uses the Buffer.from(objectToString) method to convert the object's string representation to a buffer, and then it uses the byteLength property to obtain the buffer size in bytes.
+Objects are measured as the UTF-8 byte length of their JSON representation. The same code runs in Node.js, browsers and web workers.
 
-The module uses a combination of recursion and a stack to iterate through all of its properties, adding up the number of bytes for each data type it encounters.
+Because the JSON string is built in full, measuring a large object temporarily needs several times its serialized size in extra memory: about 3-4 times for records and text, up to about 10 times for large arrays of numbers.
 
 Please note that this function will only work in some cases, especially when dealing with complex data structures or when the object contains functions.
 
 ### Supported Standard built-in and complex types
 
-- Map
-- Set
+- Map and Set passed directly (nested ones serialize as `{}`, as in JSON)
 - BigInt
 - Function
-- Typed Arrays (Int8Array, Uint32Array, Float64Array, etc)
+- Typed Arrays (Int8Array, Uint32Array, Float64Array, etc) passed directly
 
 ### Error handling
 
-Errors indicated by returned -1 in following cases:
-
-- JSON serialization error, e.g. circular references.
-- Unrecognizable TypedArray object.
-
-It prevents potential exceptions or infinite loops, improving reliability.
+sizeof does not throw when an object cannot be serialized, e.g. because of circular references. It returns an `Error` object whose message is `-1`. A DataView passed directly returns `-1`.
 
 ### Coding standards
 
@@ -50,8 +44,8 @@ Having this knowledge, the module calculates how much memory object will allocat
 ### Examples
 
 ```javascript
-// import sizeof from 'object-sizeof'
-const sizeof = require('object-sizeof')
+import sizeof from 'object-sizeof'
+// or: const sizeof = require('object-sizeof')
 const sizeObj = sizeof({ abc: 'def' })
 console.log(`Size of the object: ${sizeObj} bytes`)
 const sizeInt = sizeof(12345)
