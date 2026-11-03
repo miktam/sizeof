@@ -1,12 +1,13 @@
 {
   "name": "object-sizeof",
-  "version": "2.7.1",
+  "version": "3.0.0",
   "description": "Sizeof of a JavaScript object in Bytes",
-  "main": "indexv2.js",
+  "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/standard; ./node_modules/.bin/mocha",
     "lint": "./node_modules/.bin/standard",
-    "coverage": "./node_modules/.bin/nyc npm test; ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov --token=708ee89f-4e9c-402d-8380-1257b979596c"
+    "coverage": "./node_modules/.bin/nyc npm test; ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov --token=708ee89f-4e9c-402d-8380-1257b979596c",
+    "bench": "node bench/compare.js"
   },
   "repository": {
     "type": "git",
@@ -21,22 +22,17 @@
   "author": "Andrei Karpuszonak",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "dependencies": {
-    "buffer": "^6.0.3"
-  },
   "devDependencies": {
     "codecov": "^3.8.3",
     "mocha": "^11.8.0",
     "nyc": "^17.0.0",
+    "object-sizeof-2": "npm:object-sizeof@2.6.5",
     "should": "^13.2.3",
     "standard": "^17.1.0"
   },
-  "types": "indexv2.d.ts",
+  "types": "index.d.ts",
   "typesVersions": {
     ">=4.1": {
-      "index.js": [
-        "index.d.ts"
-      ],
       "*": [
         "ts41/*",
         "*"
@@ -44,12 +40,9 @@
     }
   },
   "files": [
-    "byte_size.js",
     "index.js",
     "index.d.ts",
-    "indexv2.js",
-    "indexv2.d.ts",
-    "ts41/indexv2.d.ts"
+    "ts41/index.d.ts"
   ],
   "standard": {
     "env": [
