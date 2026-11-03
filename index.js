@@ -1,4 +1,4 @@
-// Copyright 2014 Andrei Karpushonak
+// Copyright 2014 Andrei Karpuszonak
 
 'use strict'
 
