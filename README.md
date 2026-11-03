@@ -6,7 +6,7 @@
 
 Objects are measured as the UTF-8 byte length of their JSON representation. The same code runs in Node.js, browsers and web workers.
 
-Because the JSON string is built in full, measuring a large object temporarily needs several times its serialized size in extra memory: about 3-4 times for records and text, up to about 10 times for large arrays of numbers.
+Because the JSON string is built in full, measuring a large object temporarily needs several times its serialized size in extra memory: about 3 times for records and text, and 40 to 100 bytes per element for large flat arrays of numbers, booleans or short strings, which is 5 to over 20 times their serialized size.
 
 Please note that this function will only work in some cases, especially when dealing with complex data structures or when the object contains functions.
 

@@ -33,9 +33,13 @@
   },
   "types": "indexv2.d.ts",
   "typesVersions": {
-    "<4.1": {
-      "indexv2.d.ts": [
-        "ts40/indexv2.d.ts"
+    ">=4.1": {
+      "index.js": [
+        "index.d.ts"
+      ],
+      "*": [
+        "ts41/*",
+        "*"
       ]
     }
   },
@@ -45,7 +49,7 @@
     "index.d.ts",
     "indexv2.js",
     "indexv2.d.ts",
-    "ts40/indexv2.d.ts"
+    "ts41/indexv2.d.ts"
   ],
   "standard": {
     "env": [

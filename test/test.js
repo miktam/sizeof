@@ -227,10 +227,13 @@ describe('sizeof outside of Node.js', () => {
   })
 
   it('ignores a Buffer polyfill installed as a global in a browser', () => {
-    const polyfill = { byteLength () { throw new Error('polyfill used') } }
+    // counts correctly, so only the versions.node check keeps it out;
     // browser bundles often polyfill process too, without versions.node
+    let calls = 0
+    const polyfill = { byteLength: (str, encoding) => { calls++; return Buffer.byteLength(str, encoding) } }
     const browserSizeof = loadInWorkerScope({ Buffer: polyfill, process: { env: {}, versions: {} } })
     browserSizeof({ text: 'x'.repeat(100) }).should.be.equal(sizeof({ text: 'x'.repeat(100) }))
+    calls.should.be.equal(0)
   })
 
   it('loads when reading process.versions throws', () => {
@@ -260,6 +263,12 @@ describe('package', () => {
     const path = require('path')
     const output = execFileSync('npm', ['pack', '--dry-run', '--json'], { cwd: path.join(__dirname, '..') })
     const files = JSON.parse(output)[0].files.map(file => file.path).sort()
-    files.should.eql(['LICENSE.md', 'README.md', 'byte_size.js', 'index.d.ts', 'index.js', 'indexv2.d.ts', 'indexv2.js', 'package.json', 'ts40/indexv2.d.ts'])
+    files.should.eql(['LICENSE.md', 'README.md', 'byte_size.js', 'index.d.ts', 'index.js', 'indexv2.d.ts', 'indexv2.js', 'package.json', 'ts41/indexv2.d.ts'])
+    // the file typesVersions sends TypeScript 4.1+ to must be published, and
+    // the default one must not use export =, which TypeScript 3.0 and older
+    // (they ignore typesVersions) cannot read
+    const { types, typesVersions } = require('../package.json')
+    files.should.containEql(typesVersions['>=4.1']['*'][0].replace('*', types))
+    require('fs').readFileSync(path.join(__dirname, '..', types), 'utf8').should.not.match(/export\s*=/)
   })
 })
