@@ -253,6 +253,9 @@ describe('sizeof outside of Node.js', () => {
 describe('module formats', () => {
   it('exposes the function as default for transpiled ES imports', () => {
     sizeof.default.should.be.equal(sizeof)
+    // the 1.x entry too, which its own types declare as a default export
+    const legacy = require('../index.js')
+    legacy.default.should.be.equal(legacy)
   })
 })
 
@@ -270,5 +273,8 @@ describe('package', () => {
     const { types, typesVersions } = require('../package.json')
     files.should.containEql(typesVersions['>=4.1']['*'][0].replace('*', types))
     require('fs').readFileSync(path.join(__dirname, '..', types), 'utf8').should.not.match(/export\s*=/)
+    // TypeScript 4.1.x reads only the first candidate's declaration; with no
+    // index.js entry, the "*" fallback hands it the 1.x JS file without types
+    typesVersions['>=4.1'].should.have.property('index.js').eql(['index.d.ts'])
   })
 })

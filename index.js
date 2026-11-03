@@ -100,3 +100,5 @@ function sizeof (object) {
 }
 
 module.exports = sizeof
+// lets `import sizeof from 'object-sizeof/index.js'` work when compiled to CommonJS without esModuleInterop
+module.exports.default = sizeof
