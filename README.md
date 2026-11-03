@@ -56,6 +56,6 @@ console.log(`Size of the int: ${sizeInt} bytes`)
 
 The MIT License (MIT)
 
-Copyright (c) 2015, Andrei Karpushonak aka @miktam
+Copyright (c) 2015, Andrei Karpuszonak aka @miktam
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_shield)
