@@ -1,18 +1,19 @@
 {
   "name": "object-sizeof",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Sizeof of a JavaScript object in Bytes",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/standard; ./node_modules/.bin/mocha",
     "lint": "./node_modules/.bin/standard",
-    "coverage": "./node_modules/.bin/nyc npm test; ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov --token=708ee89f-4e9c-402d-8380-1257b979596c",
+    "coverage": "./node_modules/.bin/nyc npm test",
     "bench": "node bench/compare.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/miktam/sizeof.git"
   },
+  "homepage": "https://github.com/miktam/sizeof#readme",
   "keywords": [
     "sizeof",
     "size",
@@ -23,7 +24,6 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "codecov": "^3.8.3",
     "mocha": "^11.8.0",
     "nyc": "^17.0.0",
     "object-sizeof-2": "npm:object-sizeof@2.6.5",

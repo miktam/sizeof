@@ -94,3 +94,8 @@ The MIT License (MIT)
 Copyright (c) 2015, Andrei Karpuszonak aka @miktam
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmiktam%2Fsizeof?ref=badge_shield)
+
+### Maintainer
+
+First published in May 2014 by Andrei, who still maintains it.
+[github.com/miktam](https://github.com/miktam)
