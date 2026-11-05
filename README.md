@@ -1,6 +1,6 @@
 ## object-sizeof
 
-[![Build](https://img.shields.io/npm/v/object-sizeof)](https://img.shields.io/npm/v/object-sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof) [![codecov](https://codecov.io/gh/miktam/sizeof/branch/master/graph/badge.svg?token=qPHxmWpC1K)](https://codecov.io/gh/miktam/sizeof)
+[![Build](https://img.shields.io/npm/v/object-sizeof)](https://img.shields.io/npm/v/object-sizeof) ![GitHub contributors](https://img.shields.io/github/contributors/miktam/sizeof) [![NPM](https://img.shields.io/npm/dy/object-sizeof)](https://img.shields.io/npm/dy/object-sizeof)
 
 ### Get the size of a JavaScript object in Bytes
 
@@ -82,7 +82,6 @@ Browser bundle, minified and gzipped: 9.3 KB in 2.6.5, 1.8 KB now.
 ### Coding standards
 
 The project follows [JavaScript Standard Style](https://standardjs.com/) as a JavaScript style guide.
-Code coverage reports are done using Codecov.io.
 
 Code is written with the assumptions that any code added, which is not tested properly, is already or will be buggy.
 Hence test coverage, with the BDD style unit tests, stating the intent, and expected behaviour, is a must.
